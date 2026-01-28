@@ -1,0 +1,745 @@
+<!--
+  TREVARN LOGO MARK
+  =================
+
+  Programmatic access (all paths relative to domain root):
+
+    JSON manifest .... /trevarn-logo.json       Variants, colors, coordinates
+    SVG sprite ....... /trevarn-logo.svg        All mark variants as symbols
+    Favicon .......... /favicon.svg             Filled variant for browser tabs
+
+  CLI examples:
+
+    # Get all variant IDs
+    curl -s HOST/trevarn-logo.json | jq -r '.variants[].id'
+
+    # Get stone coordinates
+    curl -s HOST/trevarn-logo.json | jq '.coordinates'
+
+    # Get primary mark SVG
+    curl -s HOST/trevarn-logo.svg
+
+  Variants:
+    mark-stroke ...... Primary, stroke-based (headers, nav, print)
+    mark-filled ...... Solid fill (favicons, small sizes)
+    mark-continuous .. Single polyline (hero, animation)
+    stone-1/2/3 ...... Individual stones (animation)
+
+  Usage in HTML:
+    <svg width="64" height="38"><use href="/trevarn-logo.svg#mark-stroke" /></svg>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate" type="application/json" href="/trevarn-logo.json" title="Logo manifest (JSON)">
+    <link rel="alternate" type="image/svg+xml" href="/trevarn-logo.svg" title="Logo sprite (SVG)">
+    <title>Trevarn — Logo Mark</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/components/navbar.css">
+    <style>
+        :root {
+            --aour-glaz: #4A6FA5;
+            --aour-balan: #D8A23A;
+            --lin-violet: #5B6B9D;
+            --ink: #11181C;
+            --slate: #1F3A4A;
+            --mist: #8A9094;
+            --cloud: #E5E7EB;
+            --sand: #F5F1EB;
+            --pearl: #F8F9FA;
+            --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--pearl); color: var(--slate); line-height: 1.6;
+        }
+        .header {
+            background: var(--white); border-bottom: 1px solid var(--cloud);
+            padding: 48px 60px;
+        }
+        .header h1 {
+            font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--mist); margin-bottom: 8px;
+        }
+        .header h2 { font-size: 32px; font-weight: 600; color: var(--aour-glaz); font-family: 'IBM Plex Sans', sans-serif; }
+        .header .subtitle { font-size: 18px; font-weight: 300; color: var(--slate); margin-top: 4px; }
+        .header p { margin-top: 16px; color: var(--mist); font-size: 14px; max-width: 700px; }
+        .header .meta { margin-top: 20px; font-size: 11px; color: var(--mist); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px; }
+        .section-title {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--mist); margin-bottom: 12px;
+        }
+        .section-desc {
+            font-size: 14px; color: #666; margin-bottom: 32px; max-width: 700px; line-height: 1.7;
+        }
+
+        .narrative {
+            background: var(--white); border-radius: 12px;
+            padding: 40px 48px; margin-bottom: 48px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--aour-glaz);
+        }
+        .narrative h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--slate); font-family: 'IBM Plex Sans', sans-serif; }
+        .narrative h3 .light { font-weight: 300; color: var(--mist); }
+        .narrative p { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .narrative p:last-child { margin-bottom: 0; }
+        .narrative.gold { border-left-color: var(--aour-balan); }
+        .narrative.gold h3 { color: var(--aour-balan); }
+        .narrative.violet { border-left-color: var(--lin-violet); }
+        .narrative.mist { border-left-color: var(--mist); }
+        .narrative blockquote {
+            margin: 20px 0; padding: 16px 24px;
+            background: var(--pearl); border-radius: 6px;
+            font-size: 14px; color: var(--slate);
+            font-style: italic; line-height: 1.7;
+        }
+        .narrative .source {
+            font-size: 11px; color: var(--mist); margin-top: 4px;
+            font-style: normal;
+        }
+
+        .colour-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+        .card {
+            background: var(--white); border-radius: 8px; overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .card-display {
+            padding: 48px 24px; display: flex; align-items: center;
+            justify-content: center; min-height: 160px;
+        }
+        .card-label {
+            font-size: 11px; color: var(--mist); padding: 10px 16px;
+            border-top: 1px solid var(--cloud); background: #FAFBFC;
+        }
+
+        .info-bar {
+            background: #FAFBFC; border-radius: 0 0 8px 8px; padding: 24px 32px;
+            margin-bottom: 48px; border: 1px solid var(--cloud); border-top: none;
+        }
+        .info-bar h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .info-bar p { font-size: 13px; color: var(--mist); line-height: 1.6; }
+        .tag {
+            display: inline-block; font-size: 10px; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--white); padding: 3px 8px; border-radius: 4px;
+            margin-top: 8px; margin-right: 6px;
+        }
+        .tag.blue { background: var(--aour-glaz); }
+        .tag.gold { background: var(--aour-balan); }
+        .tag.dark { background: var(--slate); }
+        .tag.green { background: #2D8A4E; }
+
+        .bg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+        .divider { border: none; border-top: 1px solid var(--cloud); margin: 60px 0; }
+        .spacer { height: 48px; }
+
+        .small-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 48px; }
+        .small-card {
+            background: var(--white); border-radius: 8px; overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center;
+        }
+        .small-display {
+            padding: 24px 16px; display: flex; align-items: center;
+            justify-content: center; min-height: 80px;
+        }
+        .small-label {
+            font-size: 10px; color: var(--mist); padding: 8px 12px;
+            border-top: 1px solid var(--cloud); background: #FAFBFC;
+        }
+
+        .hero-mark {
+            background: var(--white); border-radius: 16px; padding: 80px 60px;
+            margin-bottom: 48px; text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .hero-mark svg { max-width: 100%; }
+        .hero-caption {
+            margin-top: 32px; font-size: 13px; color: var(--mist);
+        }
+        .hero-caption strong { color: var(--slate); }
+
+        .locked-box {
+            background: var(--white); border-radius: 12px;
+            padding: 40px 48px; margin-top: 60px; border: 2px solid #2D8A4E;
+        }
+        .locked-box h3 {
+            font-size: 18px; font-weight: 600; color: #2D8A4E; margin-bottom: 20px;
+        }
+        .locked-box table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .locked-box th {
+            text-align: left; font-weight: 600; font-size: 11px; letter-spacing: 0.06em;
+            text-transform: uppercase; color: var(--mist); padding: 10px 12px;
+            border-bottom: 1px solid var(--cloud);
+        }
+        .locked-box td { padding: 12px; border-bottom: 1px solid #F0F1F2; }
+        .locked-box td:first-child { font-weight: 500; color: var(--slate); }
+
+        .usage-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px;
+        }
+        .usage-card {
+            background: var(--pearl); border-radius: 8px; padding: 24px;
+        }
+        .usage-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--slate); }
+        .usage-card ul { font-size: 13px; color: #555; padding-left: 18px; line-height: 1.8; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h2 { font-size: 26px; }
+            .header .subtitle { font-size: 16px; }
+            .container { padding: 32px 24px; }
+            .narrative { padding: 28px 24px; margin-bottom: 32px; }
+            .narrative h3 { font-size: 16px; }
+            .hero-mark { padding: 48px 24px; }
+            .hero-mark svg { width: 100%; max-width: 320px; }
+            .colour-grid, .bg-grid { grid-template-columns: 1fr; }
+            .small-grid { grid-template-columns: repeat(3, 1fr); }
+            .info-bar { padding: 20px 24px; }
+            .divider { margin: 40px 0; }
+            .locked-box { padding: 28px 24px; }
+            .locked-box table { font-size: 12px; }
+            .locked-box th, .locked-box td { padding: 8px 10px; }
+            .usage-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .header h2 { font-size: 22px; }
+            .header .subtitle { font-size: 14px; }
+            .narrative { padding: 20px 16px; }
+            .small-grid { grid-template-columns: repeat(2, 1fr); }
+            .bg-grid[style*="repeat(4"] { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-bar"></div>
+
+<div class="header">
+    <h1>Trevarn — Brand Guidelines</h1>
+    <h2>Logo Mark</h2>
+    <div class="subtitle">Mark system, variants, and usage specifications</div>
+    <p>The Trevarn mark is a single continuous line tracing three ascending stone forms. This page documents the mark system: primary and secondary variants, background treatments, small-size simplifications, and the favicon. For the story behind the mark, see <a href="/trevarn-origins.html" style="color: var(--aour-glaz);">Mark Origins</a>.</p>
+    <div class="meta">January 2026 &nbsp;·&nbsp; Final specification</div>
+</div>
+
+<div class="container">
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- HERO: THE PRIMARY MARK                                  -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <div class="hero-mark">
+        <svg viewBox="0 0 420 50" width="380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="2.3,46.1 6.4,21.9 15.0,18.2 18.5,46.6 23.5,45.2 31.1,6.5 38.7,8.8 46.3,46.0 49.9,45.4 58.8,3.8 75.5,0.7 84.0,47.0" stroke="#4A6FA5" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="104" y="39" font-family="Inter, sans-serif" font-weight="600" font-size="35" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+        </svg>
+        <div class="hero-caption">
+            <strong>Primary mark:</strong> Continuous outline, 2% disorder, Aour Glaz
+        </div>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- PRIMARY MARK                                            -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Primary Mark — Continuous Outline</h2>
+
+    <div class="narrative">
+        <h3>The Default</h3>
+        <p>The primary Trevarn mark is a continuous outline with 2% disorder. This is the default for all standard usage: website, documents, presentations, product UI, signage.</p>
+        <p>It works at any size above 24px. It's clean, professional, and versatile. The continuous line emphasises the unified nature of the three stones — one system, one path, one mark.</p>
+    </div>
+
+    <div class="colour-grid">
+        <div class="card">
+            <div class="card-display">
+                <svg viewBox="0 0 320 38" width="300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#4A6FA5" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">Aour Glaz — Primary</div>
+        </div>
+        <div class="card">
+            <div class="card-display">
+                <svg viewBox="0 0 320 38" width="300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#D8A23A" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#D8A23A">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">Aour Balan</div>
+        </div>
+        <div class="card">
+            <div class="card-display">
+                <svg viewBox="0 0 320 38" width="300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#5B6B9D" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#5B6B9D">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">Lin Violet</div>
+        </div>
+    </div>
+
+    <div class="info-bar">
+        <h3>Primary Mark Usage</h3>
+        <p>Use the continuous outline as the default mark. It works on white, dark, and coloured backgrounds. Minimum size: 24px mark height. Preferred colour: Aour Glaz on light backgrounds, white on dark backgrounds.</p>
+        <span class="tag green">Primary</span>
+        <span class="tag blue">Outline</span>
+        <span class="tag dark">2% Disorder</span>
+    </div>
+
+
+    <div class="spacer"></div>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- SECONDARY MARK — HATCHED                                -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Secondary Mark — Continuous Hatched</h2>
+
+    <div class="narrative gold">
+        <h3>For Editorial & Expressive Contexts</h3>
+        <p>For editorial and expressive contexts — hero sections, blog headers, brand campaigns, print collateral — the hatched variant adds visual texture and weight. Each stone gets a unique hatch angle (43°, 48°, 41°) that reinforces its individual lean.</p>
+        <p><strong>When to use:</strong> When you want more visual presence than the outline provides. When the context is expressive rather than functional. When the mark will be displayed at 48px or larger.</p>
+        <p><strong>When NOT to use:</strong> Below 48px (hatching becomes noise). In UI contexts where simplicity matters. Mixed with the outline version in the same layout — pick one.</p>
+    </div>
+
+    <div class="colour-grid">
+        <div class="card">
+            <div class="card-display">
+                <svg viewBox="0 0 320 38" width="300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="dh1b" patternUnits="userSpaceOnUse" width="3.5" height="3.5" patternTransform="rotate(43)">
+                            <line x1="0" y1="0" x2="0" y2="3.5" stroke="#4A6FA5" stroke-width="0.8"/>
+                        </pattern>
+                        <pattern id="dh2b" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(48)">
+                            <line x1="0" y1="0" x2="0" y2="4" stroke="#4A6FA5" stroke-width="0.85"/>
+                        </pattern>
+                        <pattern id="dh3b" patternUnits="userSpaceOnUse" width="3.8" height="3.8" patternTransform="rotate(41)">
+                            <line x1="0" y1="0" x2="0" y2="3.8" stroke="#4A6FA5" stroke-width="0.9"/>
+                        </pattern>
+                        <clipPath id="dcs1"><polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5"/></clipPath>
+                        <clipPath id="dcs2"><polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2"/></clipPath>
+                        <clipPath id="dcs3"><polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8"/></clipPath>
+                    </defs>
+                    <rect clip-path="url(#dcs1)" x="0" y="0" width="16" height="36" fill="url(#dh1b)"/>
+                    <rect clip-path="url(#dcs2)" x="15" y="0" width="22" height="36" fill="url(#dh2b)"/>
+                    <rect clip-path="url(#dcs3)" x="35" y="0" width="30" height="36" fill="url(#dh3b)"/>
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#4A6FA5" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">Aour Glaz — Hatched</div>
+        </div>
+        <div class="card">
+            <div class="card-display">
+                <svg viewBox="0 0 320 38" width="300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="dh1g" patternUnits="userSpaceOnUse" width="3.5" height="3.5" patternTransform="rotate(43)">
+                            <line x1="0" y1="0" x2="0" y2="3.5" stroke="#D8A23A" stroke-width="0.8"/>
+                        </pattern>
+                        <pattern id="dh2g" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(48)">
+                            <line x1="0" y1="0" x2="0" y2="4" stroke="#D8A23A" stroke-width="0.85"/>
+                        </pattern>
+                        <pattern id="dh3g" patternUnits="userSpaceOnUse" width="3.8" height="3.8" patternTransform="rotate(41)">
+                            <line x1="0" y1="0" x2="0" y2="3.8" stroke="#D8A23A" stroke-width="0.9"/>
+                        </pattern>
+                    </defs>
+                    <rect clip-path="url(#dcs1)" x="0" y="0" width="16" height="36" fill="url(#dh1g)"/>
+                    <rect clip-path="url(#dcs2)" x="15" y="0" width="22" height="36" fill="url(#dh2g)"/>
+                    <rect clip-path="url(#dcs3)" x="35" y="0" width="30" height="36" fill="url(#dh3g)"/>
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#D8A23A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#D8A23A">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">Aour Balan — Hatched</div>
+        </div>
+        <div class="card">
+            <div class="card-display">
+                <svg viewBox="0 0 320 38" width="300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="dh1v" patternUnits="userSpaceOnUse" width="3.5" height="3.5" patternTransform="rotate(43)">
+                            <line x1="0" y1="0" x2="0" y2="3.5" stroke="#5B6B9D" stroke-width="0.8"/>
+                        </pattern>
+                        <pattern id="dh2v" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(48)">
+                            <line x1="0" y1="0" x2="0" y2="4" stroke="#5B6B9D" stroke-width="0.85"/>
+                        </pattern>
+                        <pattern id="dh3v" patternUnits="userSpaceOnUse" width="3.8" height="3.8" patternTransform="rotate(41)">
+                            <line x1="0" y1="0" x2="0" y2="3.8" stroke="#5B6B9D" stroke-width="0.9"/>
+                        </pattern>
+                    </defs>
+                    <rect clip-path="url(#dcs1)" x="0" y="0" width="16" height="36" fill="url(#dh1v)"/>
+                    <rect clip-path="url(#dcs2)" x="15" y="0" width="22" height="36" fill="url(#dh2v)"/>
+                    <rect clip-path="url(#dcs3)" x="35" y="0" width="30" height="36" fill="url(#dh3v)"/>
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#5B6B9D" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#5B6B9D">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">Lin Violet — Hatched</div>
+        </div>
+    </div>
+
+    <div class="info-bar">
+        <h3>Secondary Mark Usage</h3>
+        <p>Use the hatched variant for editorial/expressive contexts where you want more visual weight and texture. Each stone has a unique hatch angle (43°/48°/41°) and density that reinforces its individual character. Minimum size: 48px mark height.</p>
+        <span class="tag gold">Secondary</span>
+        <span class="tag blue">Hatched</span>
+        <span class="tag dark">Editorial</span>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- BACKGROUND TREATMENTS                                   -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Background Treatments</h2>
+    <p class="section-desc">The primary mark adapts to all standard backgrounds.</p>
+
+    <div class="bg-grid">
+        <div class="card">
+            <div class="card-display" style="background: #FFFFFF;">
+                <svg viewBox="0 0 320 38" width="280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#4A6FA5" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">On White — default</div>
+        </div>
+        <div class="card">
+            <div class="card-display" style="background: #11181C;">
+                <svg viewBox="0 0 320 38" width="280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#FFFFFF">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">On Ink — dark mode</div>
+        </div>
+        <div class="card">
+            <div class="card-display" style="background: #4A6FA5;">
+                <svg viewBox="0 0 320 38" width="280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#FFFFFF">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">On Aour Glaz</div>
+        </div>
+    </div>
+    <div class="bg-grid">
+        <div class="card">
+            <div class="card-display" style="background: #F5F1EB;">
+                <svg viewBox="0 0 320 38" width="280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#4A6FA5" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                </svg>
+            </div>
+            <div class="card-label">On Sand — warm/print</div>
+        </div>
+        <div class="card">
+            <div class="card-display" style="background: #FFFFFF;">
+                <svg viewBox="0 0 260 56" width="220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2,52 5,24 14,20 18,52 24,50 34,8 44,12 54,52 60,50 72,4 92,1 104,54" stroke="#4A6FA5" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="120" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                    <text x="120" y="48" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#D8A23A">DIFENN</text>
+                </svg>
+            </div>
+            <div class="card-label">Difenn product lockup — stacked</div>
+        </div>
+        <div class="card">
+            <div class="card-display" style="background: #11181C;">
+                <svg viewBox="0 0 260 56" width="220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2,52 5,24 14,20 18,52 24,50 34,8 44,12 54,52 60,50 72,4 92,1 104,54" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="120" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#FFFFFF">TREVARN</text>
+                    <text x="120" y="48" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#D8A23A">DIFENN</text>
+                </svg>
+            </div>
+            <div class="card-label">Difenn product lockup — dark</div>
+        </div>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- SIMPLIFIED MARK — SMALL SIZES                           -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Simplified Mark — Small Sizes</h2>
+    <p class="section-desc">For favicon, app icon, and contexts under 32px where the connecting baseline would be illegible. Same distinct stone proportions, now as three separate closed polygons.</p>
+
+    <div class="small-grid">
+        <div class="small-card">
+            <div class="small-display">
+                <svg viewBox="0 0 64 38" width="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" stroke="#4A6FA5" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" stroke="#4A6FA5" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#4A6FA5" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="small-label">Outline Glaz</div>
+        </div>
+        <div class="small-card">
+            <div class="small-display">
+                <svg viewBox="0 0 64 38" width="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" stroke="#D8A23A" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" stroke="#D8A23A" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#D8A23A" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="small-label">Outline Balan</div>
+        </div>
+        <div class="small-card">
+            <div class="small-display" style="background: var(--ink);">
+                <svg viewBox="0 0 64 38" width="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="small-label">On Ink</div>
+        </div>
+        <div class="small-card">
+            <div class="small-display">
+                <svg viewBox="0 0 64 38" width="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <clipPath id="dds1"><polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5"/></clipPath>
+                        <clipPath id="dds2"><polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2"/></clipPath>
+                        <clipPath id="dds3"><polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8"/></clipPath>
+                    </defs>
+                    <rect clip-path="url(#dds1)" x="0" y="0" width="16" height="36" fill="url(#dh1b)"/>
+                    <rect clip-path="url(#dds2)" x="15" y="0" width="22" height="36" fill="url(#dh2b)"/>
+                    <rect clip-path="url(#dds3)" x="35" y="0" width="30" height="36" fill="url(#dh3b)"/>
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" stroke="#4A6FA5" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" stroke="#4A6FA5" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#4A6FA5" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="small-label">Hatched Glaz</div>
+        </div>
+        <div class="small-card">
+            <div class="small-display" style="background: var(--ink);">
+                <svg viewBox="0 0 64 38" width="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="dhw1" patternUnits="userSpaceOnUse" width="3.5" height="3.5" patternTransform="rotate(43)">
+                            <line x1="0" y1="0" x2="0" y2="3.5" stroke="#FFFFFF" stroke-width="0.8"/>
+                        </pattern>
+                        <pattern id="dhw2" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(48)">
+                            <line x1="0" y1="0" x2="0" y2="4" stroke="#FFFFFF" stroke-width="0.85"/>
+                        </pattern>
+                        <pattern id="dhw3" patternUnits="userSpaceOnUse" width="3.8" height="3.8" patternTransform="rotate(41)">
+                            <line x1="0" y1="0" x2="0" y2="3.8" stroke="#FFFFFF" stroke-width="0.9"/>
+                        </pattern>
+                    </defs>
+                    <rect clip-path="url(#dds1)" x="0" y="0" width="16" height="36" fill="url(#dhw1)"/>
+                    <rect clip-path="url(#dds2)" x="15" y="0" width="22" height="36" fill="url(#dhw2)"/>
+                    <rect clip-path="url(#dds3)" x="35" y="0" width="30" height="36" fill="url(#dhw3)"/>
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" stroke="#FFFFFF" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" stroke="#FFFFFF" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#FFFFFF" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="small-label">Hatched Ink</div>
+        </div>
+        <div class="small-card">
+            <div class="small-display" style="background: var(--aour-glaz);">
+                <svg viewBox="0 0 64 38" width="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="small-label">On Glaz</div>
+        </div>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- FAVICON — SOLID FILL                                    -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Favicon — Solid Fill</h2>
+    <p class="section-desc">At browser-tab scale (16–32px), even the simplified outline polygons lose legibility. The favicon uses solid-filled stones to maintain recognisability at the smallest sizes.</p>
+
+    <div class="bg-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="card">
+            <div class="card-display" style="background: var(--white);">
+                <svg viewBox="0 0 64 38" width="64" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" fill="#4A6FA5"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" fill="#4A6FA5"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" fill="#4A6FA5"/>
+                </svg>
+            </div>
+            <div class="card-label">64px — preview</div>
+        </div>
+        <div class="card">
+            <div class="card-display" style="background: var(--white);">
+                <svg viewBox="0 0 64 38" width="32" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" fill="#4A6FA5"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" fill="#4A6FA5"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" fill="#4A6FA5"/>
+                </svg>
+            </div>
+            <div class="card-label">32px — bookmark</div>
+        </div>
+        <div class="card">
+            <div class="card-display" style="background: var(--white);">
+                <svg viewBox="0 0 64 38" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" fill="#4A6FA5"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" fill="#4A6FA5"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" fill="#4A6FA5"/>
+                </svg>
+            </div>
+            <div class="card-label">16px — browser tab</div>
+        </div>
+        <div class="card">
+            <div class="card-display" style="background: var(--ink);">
+                <svg viewBox="0 0 64 38" width="32" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" fill="#FFFFFF"/>
+                    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" fill="#FFFFFF"/>
+                    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" fill="#FFFFFF"/>
+                </svg>
+            </div>
+            <div class="card-label">32px — dark mode</div>
+        </div>
+    </div>
+
+    <div class="narrative mist">
+        <h3>Why Solid Fill?</h3>
+        <p>The primary mark uses a 1.8px stroke at viewBox scale — rendered at 16px wide in a browser tab, that stroke becomes sub-pixel and vanishes. Solid fill preserves the three-stone silhouette at any size, trading the drawn quality for pure recognition.</p>
+        <p>The transition from outline to solid mirrors how the mark system degrades gracefully: <strong>continuous outline</strong> → <strong>discrete outline</strong> → <strong>discrete solid</strong>. Each step simplifies while retaining the essential three-stone rhythm.</p>
+    </div>
+
+    <div class="narrative">
+        <h3>Favicon SVG Reference</h3>
+        <p style="font-family: 'SF Mono', Monaco, Consolas, monospace; font-size: 12px; line-height: 1.8; background: var(--ink); color: #A8B2D1; padding: 16px; border-radius: 6px; overflow-x: auto;">
+            &lt;svg viewBox="0 0 64 38" xmlns="http://www.w3.org/2000/svg"&gt;<br>
+            &nbsp;&nbsp;&lt;polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" fill="#4A6FA5"/&gt;<br>
+            &nbsp;&nbsp;&lt;polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" fill="#4A6FA5"/&gt;<br>
+            &nbsp;&nbsp;&lt;polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" fill="#4A6FA5"/&gt;<br>
+            &lt;/svg&gt;
+        </p>
+        <p style="margin-top: 16px; font-size: 12px; color: var(--mist);">File: <code>favicon.svg</code> — referenced via <code>&lt;link rel="icon" type="image/svg+xml" href="/favicon.svg"&gt;</code> on all pages.</p>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- LOCKED SPECIFICATIONS                                   -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <div class="locked-box">
+        <h3>Locked Specifications</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>Specification</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Primary mark</strong></td>
+                    <td>Continuous outline, 2% disorder</td>
+                    <td>Default for all usage. Minimum 24px height.</td>
+                </tr>
+                <tr>
+                    <td><strong>Secondary mark</strong></td>
+                    <td>Continuous hatched, 2% disorder</td>
+                    <td>Editorial/expressive contexts. Minimum 48px height.</td>
+                </tr>
+                <tr>
+                    <td><strong>Simplified mark</strong></td>
+                    <td>Discrete outline polygons</td>
+                    <td>Contexts under 32px where continuous line is illegible.</td>
+                </tr>
+                <tr>
+                    <td><strong>Favicon mark</strong></td>
+                    <td>Discrete solid-filled polygons</td>
+                    <td>Browser tab, bookmarks, PWA icon. Under 32px, solid fill only.</td>
+                </tr>
+                <tr>
+                    <td><strong>Disorder level</strong></td>
+                    <td>2%</td>
+                    <td>Vertices shifted 0.5-1.0 units from mathematical positions.</td>
+                </tr>
+                <tr>
+                    <td><strong>Stroke width</strong></td>
+                    <td>1.8px (outline), 1.2px (hatched outline)</td>
+                    <td>At standard viewBox 0 0 320 38.</td>
+                </tr>
+                <tr>
+                    <td><strong>Hatch angles</strong></td>
+                    <td>Stone 1: 43°, Stone 2: 48°, Stone 3: 41°</td>
+                    <td>Unique angle per stone reinforces individual character.</td>
+                </tr>
+                <tr>
+                    <td><strong>Primary colour</strong></td>
+                    <td>Aour Glaz #4A6FA5</td>
+                    <td>On light backgrounds. White on dark backgrounds.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="usage-grid">
+            <div class="usage-card">
+                <h4>Use Outline When:</h4>
+                <ul>
+                    <li>Default for all contexts</li>
+                    <li>Website headers and navigation</li>
+                    <li>Documents and presentations</li>
+                    <li>Product UI and interfaces</li>
+                    <li>Any size from 24px up</li>
+                </ul>
+            </div>
+            <div class="usage-card">
+                <h4>Use Hatched When:</h4>
+                <ul>
+                    <li>Hero sections and landing pages</li>
+                    <li>Blog headers and editorial</li>
+                    <li>Brand campaigns and advertising</li>
+                    <li>Print collateral where texture helps</li>
+                    <li>48px or larger only</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- SVG REFERENCE                                           -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <div class="narrative mist">
+        <h3>SVG Reference — Primary Mark</h3>
+        <p style="font-family: 'SF Mono', Monaco, Consolas, monospace; font-size: 12px; line-height: 1.8; background: #F5F6F7; padding: 16px; border-radius: 6px; overflow-x: auto;">
+            &lt;polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8"<br>
+            &nbsp;&nbsp;stroke="#4A6FA5" stroke-width="1.8" fill="none"<br>
+            &nbsp;&nbsp;stroke-linecap="round" stroke-linejoin="round"/&gt;
+        </p>
+        <p style="margin-top: 16px;"><strong>ViewBox:</strong> 0 0 64 36 (mark only) &nbsp;|&nbsp; 0 0 320 38 (with wordmark)</p>
+    </div>
+
+</div>
+<script src="/components/navbar.js"></script>
+</body>
+</html>

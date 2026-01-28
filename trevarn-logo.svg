@@ -1,0 +1,83 @@
+<!--
+  TREVARN LOGO MARK
+  =================
+  The three menhirs of Brittany - standing stones rendered as a continuous line
+  or discrete forms depending on context.
+
+  Variants:
+    #mark-stroke ........ Primary mark, stroke-based, currentColor
+    #mark-filled ........ Solid fill for small sizes, currentColor
+    #mark-continuous .... Single continuous line, currentColor
+    #stones-stroke ...... Three discrete stones, stroke-based
+    #stones-filled ...... Three discrete stones, filled
+
+  Usage:
+    <svg><use href="/trevarn-logo.svg#mark-stroke" /></svg>
+
+  Spec:
+    viewBox: 0 0 64 38
+    Stone coordinates (shared across all variants):
+      Stone 1: 2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5
+      Stone 2: 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2
+      Stone 3: 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8
+-->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PRIMARY MARK - Stroke-based, inherits currentColor
+       Use for: Headers, navigation, large display
+  ═══════════════════════════════════════════════════════════════ -->
+  <symbol id="mark-stroke" viewBox="0 0 64 38">
+    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5"
+             fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linejoin="round" stroke-linecap="round"/>
+    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2"
+             fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linejoin="round" stroke-linecap="round"/>
+    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8"
+             fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FILLED MARK - Solid fill, inherits currentColor
+       Use for: Favicons, small sizes (<32px), app icons
+  ═══════════════════════════════════════════════════════════════ -->
+  <symbol id="mark-filled" viewBox="0 0 64 38">
+    <polygon points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5" fill="currentColor"/>
+    <polygon points="17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2" fill="currentColor"/>
+    <polygon points="37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" fill="currentColor"/>
+  </symbol>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CONTINUOUS LINE - Single polyline path
+       Use for: Hero sections, special brand moments
+  ═══════════════════════════════════════════════════════════════ -->
+  <symbol id="mark-continuous" viewBox="0 0 64 38">
+    <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8"
+              fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       INDIVIDUAL STONES - For animation or separate styling
+  ═══════════════════════════════════════════════════════════════ -->
+  <symbol id="stone-1" viewBox="0 0 16 24">
+    <polygon points="2,22 4,4 10,2 12,22"
+             fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="stone-2" viewBox="0 0 20 32">
+    <polygon points="2,30 6,2 12,4 18,30"
+             fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="stone-3" viewBox="0 0 28 36">
+    <polygon points="2,34 8,4 20,2 26,34"
+             fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+
+</svg>

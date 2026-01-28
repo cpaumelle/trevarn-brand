@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>Trevarn — The Name</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/components/navbar.css">
+    <style>
+        :root {
+            --aour-glaz: #4A6FA5;
+            --aour-balan: #D8A23A;
+            --lin-violet: #5B6B9D;
+            --ink: #11181C;
+            --slate: #1F3A4A;
+            --mist: #8A9094;
+            --cloud: #E5E7EB;
+            --sand: #F5F1EB;
+            --pearl: #F8F9FA;
+            --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--pearl); color: var(--slate); line-height: 1.6;
+        }
+        .header {
+            background: var(--white); border-bottom: 1px solid var(--cloud);
+            padding: 48px 60px;
+        }
+        .header h1 {
+            font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--mist); margin-bottom: 8px;
+        }
+        .header h2 { font-size: 32px; font-weight: 600; color: var(--aour-glaz); }
+        .header .subtitle { font-size: 18px; font-weight: 300; color: var(--slate); margin-top: 4px; }
+        .header p { margin-top: 16px; color: var(--mist); font-size: 14px; max-width: 700px; }
+        .header .meta { margin-top: 20px; font-size: 11px; color: var(--mist); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px; }
+        .section-title {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--mist); margin-bottom: 12px;
+        }
+        .section-desc {
+            font-size: 14px; color: #666; margin-bottom: 32px; max-width: 700px; line-height: 1.7;
+        }
+        .divider { border: none; border-top: 1px solid var(--cloud); margin: 60px 0; }
+        .spacer { height: 48px; }
+
+        .narrative {
+            background: var(--white); border-radius: 12px;
+            padding: 40px 48px; margin-bottom: 48px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--aour-glaz);
+        }
+        .narrative.gold { border-left-color: var(--aour-balan); }
+        .narrative.violet { border-left-color: var(--lin-violet); }
+        .narrative.mist { border-left-color: var(--mist); }
+        .narrative.green { border-left-color: #2D8A4E; }
+        .narrative h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--slate); }
+        .narrative h3 .light { font-weight: 300; color: var(--mist); }
+        .narrative p { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .narrative p:last-child { margin-bottom: 0; }
+        .narrative ul { font-size: 14px; color: #555; padding-left: 20px; line-height: 2; margin-bottom: 12px; }
+        .narrative ul:last-child { margin-bottom: 0; }
+
+        .hero-name {
+            background: var(--white); border-radius: 16px; padding: 80px 60px;
+            margin-bottom: 48px; text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .hero-name .name-display {
+            font-size: 72px; font-weight: 700; color: var(--aour-glaz);
+            letter-spacing: 0.08em; margin-bottom: 24px;
+        }
+        .hero-name .etymology {
+            display: flex; justify-content: center; gap: 48px; margin-bottom: 24px;
+        }
+        .hero-name .etymology .part {
+            text-align: center;
+        }
+        .hero-name .etymology .part .word {
+            font-size: 28px; font-weight: 600; color: var(--slate);
+            letter-spacing: 0.04em;
+        }
+        .hero-name .etymology .part .meaning {
+            font-size: 14px; color: var(--mist); margin-top: 4px;
+        }
+        .hero-name .etymology .plus {
+            font-size: 28px; color: var(--cloud); line-height: 1.2; align-self: flex-start;
+        }
+        .hero-name .origin-tag {
+            font-size: 13px; color: var(--mist); margin-top: 12px;
+        }
+        .hero-name .origin-tag strong { color: var(--slate); }
+
+        .lang-table {
+            width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px;
+        }
+        .lang-table th {
+            text-align: left; font-weight: 600; font-size: 11px; letter-spacing: 0.06em;
+            text-transform: uppercase; color: var(--mist); padding: 10px 16px;
+            border-bottom: 1px solid var(--cloud);
+        }
+        .lang-table td {
+            padding: 12px 16px; border-bottom: 1px solid #F0F1F2; vertical-align: top;
+        }
+        .lang-table td:first-child { font-weight: 500; color: var(--slate); }
+
+        .arch-grid {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+            margin-top: 20px; margin-bottom: 12px;
+        }
+        .arch-card {
+            background: var(--pearl); border-radius: 8px; padding: 20px 16px;
+            text-align: center;
+        }
+        .arch-card .parent {
+            font-size: 13px; font-weight: 600; color: var(--aour-glaz);
+        }
+        .arch-card .child {
+            font-size: 12px; color: var(--mist); margin-top: 2px;
+        }
+
+        .phonetics-box {
+            background: var(--pearl); border-radius: 8px; padding: 32px;
+            text-align: center; margin: 24px 0;
+        }
+        .phonetics-box .ipa {
+            font-size: 36px; font-weight: 300; color: var(--slate); letter-spacing: 0.06em;
+        }
+        .phonetics-box .stress {
+            font-size: 14px; color: var(--mist); margin-top: 8px;
+        }
+
+        .tag {
+            display: inline-block; font-size: 10px; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--white); padding: 3px 8px; border-radius: 4px;
+            margin-top: 8px; margin-right: 6px;
+        }
+        .tag.blue { background: var(--aour-glaz); }
+        .tag.green { background: #2D8A4E; }
+        .tag.dark { background: var(--slate); }
+
+        .verdict-box {
+            background: var(--white); border-radius: 12px;
+            padding: 40px 48px; margin-top: 60px; border: 2px solid #2D8A4E;
+        }
+        .verdict-box h3 {
+            font-size: 18px; font-weight: 600; color: #2D8A4E; margin-bottom: 20px;
+        }
+        .verdict-box p { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .verdict-box p:last-child { margin-bottom: 0; }
+        .verdict-box strong { color: var(--slate); }
+    
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h2 { font-size: 26px; }
+            .header .subtitle { font-size: 16px; }
+            .container { padding: 32px 24px; }
+            .narrative { padding: 28px 24px; margin-bottom: 32px; }
+            .narrative h3 { font-size: 16px; }
+            .hero-name { padding: 48px 24px; }
+            .hero-name .name-display { font-size: 48px; }
+            .hero-name .etymology { flex-direction: column; gap: 16px; }
+            .hero-name .etymology .plus { display: none; }
+            .hero-name .etymology .part .word { font-size: 22px; }
+            .arch-grid { grid-template-columns: repeat(3, 1fr); }
+            .divider { margin: 40px 0; }
+            .lang-table th, .lang-table td { padding: 10px 12px; }
+            .verdict-box { padding: 28px 24px; }
+        }
+        @media (max-width: 480px) {
+            .header h2 { font-size: 22px; }
+            .header .subtitle { font-size: 14px; }
+            .hero-name .name-display { font-size: 36px; }
+            .arch-grid { grid-template-columns: repeat(2, 1fr); }
+            .narrative { padding: 20px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-bar"></div>
+
+<div class="header">
+    <h1>Trevarn — Brand Guidelines</h1>
+    <h2>The Name</h2>
+    <div class="subtitle">Etymology, phonetics, and the case for Trevarn</div>
+    <p>The name Trevarn is rooted in the Cornish language, one of the Brythonic Celtic languages closely related to Breton and Welsh. It carries deep associations with place, settlement, and permanence.</p>
+    <div class="meta">January 2026</div>
+</div>
+
+<div class="container">
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- HERO: THE NAME                                          -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <div class="hero-name">
+        <div class="name-display">TREVARN</div>
+        <div class="etymology">
+            <div class="part">
+                <div class="word">Tre</div>
+                <div class="meaning">settlement / homestead</div>
+            </div>
+            <div class="plus">+</div>
+            <div class="part">
+                <div class="word">Varn</div>
+                <div class="meaning">boundary / land division</div>
+            </div>
+        </div>
+        <div class="origin-tag"><strong>Cornish root</strong> — Brythonic Celtic language family</div>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- LINGUISTIC & SEMANTIC ANALYSIS                          -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">1.1 Linguistic & Semantic Analysis</h2>
+
+    <div class="narrative">
+        <h3>Origin</h3>
+        <p>Derived from <strong>Cornish</strong>, one of the Brythonic Celtic languages alongside Breton and Welsh. The prefix <em>Tre</em> means settlement or homestead — one of the most common place-name elements in Cornwall, appearing in hundreds of villages and towns. The element <em>Varn</em> is likely related to boundary or land division variants.</p>
+    </div>
+
+    <div class="narrative gold">
+        <h3>Core Semantics</h3>
+        <p>The compound meaning resolves to three complementary readings:</p>
+        <ul>
+            <li><strong>"Founded place"</strong> — an established, intentional settlement</li>
+            <li><strong>"Established domain"</strong> — a defined territory with clear boundaries</li>
+            <li><strong>"Place of activity / settlement"</strong> — a working, living, productive place</li>
+        </ul>
+        <p>These are strong company metaphors: not product-specific, not sector-limiting, and strongly associated with <strong>permanence and structure</strong>.</p>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- PRONUNCIATION & PHONETICS                               -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">1.2 Pronunciation & Phonetics</h2>
+
+    <div class="narrative">
+        <h3>How It Sounds</h3>
+        <div class="phonetics-box">
+            <div class="ipa">TREV-arn</div>
+            <div class="stress">Stress on first syllable &middot; intuitive pattern</div>
+        </div>
+        <ul>
+            <li>Strong consonant-vowel balance</li>
+            <li>Ends in <em>-arn</em> — a serious, grounded terminal sound (similar to <em>Anduril</em>, <em>Palantir</em>)</li>
+            <li>No ambiguity in any major language</li>
+        </ul>
+        <p>Reads well in executive speech, investor decks, and legal documents.</p>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- CROSS-LANGUAGE BEHAVIOUR                                -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">1.3 Cross-Language Behaviour</h2>
+
+    <div class="narrative">
+        <h3>International Readability</h3>
+        <table class="lang-table">
+            <thead>
+                <tr><th>Language</th><th>Assessment</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>English</td><td>Natural pronunciation; no ambiguity</td></tr>
+                <tr><td>French</td><td>Pronounceable; neutral; no false friends</td></tr>
+                <tr><td>Spanish / Italian</td><td>Clean phonetics</td></tr>
+                <tr><td>German</td><td>Stable; no semantic collisions</td></tr>
+                <tr><td>Nordic</td><td>Neutral</td></tr>
+                <tr><td>Global English</td><td>Strong</td></tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 16px;">No negative or unintended meanings in any major commercial language. The name is globally clean.</p>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- BRAND ARCHITECTURE FIT                                  -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">1.4 Brand Architecture Fit</h2>
+
+    <div class="narrative violet">
+        <h3>A Holding-Company Name</h3>
+        <p>Trevarn works naturally as a parent brand with product and division suffixes:</p>
+        <div class="arch-grid">
+            <div class="arch-card">
+                <div class="parent">Trevarn</div>
+                <div class="child">Systems</div>
+            </div>
+            <div class="arch-card">
+                <div class="parent">Trevarn</div>
+                <div class="child">Technologies</div>
+            </div>
+            <div class="arch-card">
+                <div class="parent">Trevarn</div>
+                <div class="child">Group</div>
+            </div>
+            <div class="arch-card">
+                <div class="parent">Trevarn</div>
+                <div class="child">Labs</div>
+            </div>
+            <div class="arch-card">
+                <div class="parent">Trevarn</div>
+                <div class="child">Safety</div>
+            </div>
+        </div>
+        <p>All read naturally. This is a <strong>top-tier holding-company name</strong>.</p>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- LEGAL / TRADEMARK RISK                                  -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">1.5 Legal / Trademark Risk</h2>
+
+    <div class="narrative green">
+        <h3>Distinctiveness</h3>
+        <ul>
+            <li>Not a dictionary word in English</li>
+            <li>Not a modern surname</li>
+            <li>Not a geographic place currently in commercial use</li>
+        </ul>
+        <p>This puts it in a <strong>low-collision class</strong>.</p>
+    </div>
+
+    <div class="narrative">
+        <h3>Known Conflicts</h3>
+        <p>No widely known global brand named "Trevarn". No high-visibility tech, defence, or safety companies with this mark.</p>
+    </div>
+
+    <div class="narrative">
+        <h3>Trademark Registrability</h3>
+        <p><strong>High likelihood of acceptance</strong> in:</p>
+        <ul>
+            <li>EUIPO (European Union Intellectual Property Office)</li>
+            <li>UKIPO (UK Intellectual Property Office)</li>
+            <li>USPTO (United States Patent and Trademark Office)</li>
+        </ul>
+        <p>Subject to a formal clearance search, but risk profile is low.</p>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- INVESTOR & EXIT PERCEPTION                              -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">1.6 Investor & Exit Perception</h2>
+
+    <div class="narrative gold">
+        <h3>How It Reads in a Boardroom</h3>
+        <ul>
+            <li>Feels <strong>established</strong>, not gimmicky</li>
+            <li>Reads as a "serious company name"</li>
+            <li>Suitable for: connected IoT, building systems, infrastructure, logistics, deep tech platforms</li>
+        </ul>
+        <p><strong>This name will not age badly.</strong></p>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- CELTIC CONNECTION                                       -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <hr class="divider">
+
+    <h2 class="section-title">1.7 The Celtic Thread</h2>
+
+    <div class="narrative">
+        <h3>Cornwall, Brittany, and the Brythonic Bridge</h3>
+        <p>Cornish and Breton are sibling languages — both descended from Common Brythonic, both shaped by the same Celtic seafaring culture that connected southwest Britain and northwest France across the Channel. A Cornish speaker in the 15th century could have conversed with a Breton speaker with relative ease.</p>
+        <p>This linguistic kinship is central to Trevarn's brand identity. The name is <strong>Cornish in origin</strong>, while the visual language — the menhirs, the colours (Aour Glaz, Aour Balan), the heritage references — draws from <strong>Breton culture</strong>. Together, they represent a unified Celtic identity: ancient, enduring, rooted in both sides of the water.</p>
+        <p>The prefix <em>Tre</em> appears in hundreds of Cornish place names (Truro, Trevose, Tregaron) and its Breton cognate <em>Tre-</em> appears across Brittany (Tregastel, Tregor, Trebeurden). The word carries the same meaning in both languages: <strong>a place where people settled, built, and stayed</strong>.</p>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- VERDICT                                                 -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <div class="verdict-box">
+        <h3>Verdict</h3>
+        <p>Trevarn is a <strong>Cornish-rooted, globally clean, linguistically stable name</strong> that carries deep associations with place, permanence, and established structure. It works across languages without collision, supports natural brand architecture extensions, and reads as serious without being sterile.</p>
+        <p>Combined with the .com domain, it positions the company at the top tier of naming: distinctive enough to trademark, grounded enough for boardrooms, and culturally rich enough to build a story around.</p>
+        <span class="tag green">Name Locked</span>
+        <span class="tag blue">trevarn.com</span>
+        <span class="tag dark">Low Trademark Risk</span>
+    </div>
+
+</div>
+<script src="/components/navbar.js"></script>
+</body>
+</html>

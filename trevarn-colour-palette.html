@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>Trevarn — Complete Colour Palette</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/components/navbar.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F8F9FA;
+            color: #1F3A4A;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #FFFFFF;
+            border-bottom: 1px solid #E5E7EB;
+            padding: 40px 60px;
+        }
+        .header h1 {
+            font-size: 14px; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: #8A9094; margin-bottom: 8px;
+        }
+        .header h2 { font-size: 32px; font-weight: 600; color: #1F3A4A; }
+        .header p { margin-top: 12px; color: #8A9094; font-size: 14px; max-width: 700px; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px; }
+
+        .section-title {
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: #8A9094; margin-bottom: 32px;
+            padding-bottom: 16px; border-bottom: 1px solid #E5E7EB;
+        }
+
+        /* Story boxes */
+        .story-box {
+            background: #FFFFFF; border-radius: 8px;
+            padding: 32px; margin-bottom: 48px;
+        }
+        .story-box.primary { border-left: 4px solid #4A6FA5; }
+        .story-box.secondary { border-left: 4px solid #D8A23A; }
+        .story-box.tertiary { border-left: 4px solid #5B6B9D; }
+        .story-box h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .story-box.primary h3 { color: #4A6FA5; }
+        .story-box.secondary h3 { color: #B8862E; }
+        .story-box.tertiary h3 { color: #5B6B9D; }
+        .story-box p { font-size: 14px; color: #555; line-height: 1.7; }
+
+        /* Flower references */
+        .flower-reference {
+            display: flex; gap: 16px; align-items: center;
+            margin-bottom: 32px; padding: 24px; border-radius: 8px;
+        }
+        .flower-reference.blue { background: linear-gradient(135deg, #E8F0F8 0%, #F0F4F8 100%); }
+        .flower-reference.gold { background: linear-gradient(135deg, #FAF3E0 0%, #F8F0D8 100%); }
+        .flower-reference.violet { background: linear-gradient(135deg, #ECEDF5 0%, #F0EFF6 100%); }
+        .flower-colours { display: flex; gap: 8px; }
+        .flower-colours span {
+            width: 32px; height: 32px; border-radius: 50%;
+            border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .flower-text { font-size: 13px; color: #555; }
+
+        /* Palette master grid */
+        .palette-master {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px; margin-bottom: 80px;
+        }
+        .palette-column { display: flex; flex-direction: column; gap: 0; }
+        .palette-column-header {
+            font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+            text-transform: uppercase; color: #8A9094;
+            margin-bottom: 16px;
+        }
+        .palette-chip {
+            padding: 20px 24px; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .palette-chip:first-of-type { border-radius: 8px 8px 0 0; }
+        .palette-chip:last-of-type { border-radius: 0 0 8px 8px; }
+        .palette-chip .name { font-size: 13px; font-weight: 500; }
+        .palette-chip .hex { font-family: 'SF Mono', Monaco, monospace; font-size: 12px; opacity: 0.8; }
+
+        /* Colour sections */
+        .colour-section { margin-bottom: 80px; }
+        .colour-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+        .colour-swatch { width: 48px; height: 48px; border-radius: 8px; }
+        .colour-info h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+        .colour-info p { font-size: 13px; color: #8A9094; }
+        .colour-info code {
+            font-family: 'SF Mono', Monaco, monospace; font-size: 12px;
+            background: #F0F1F2; padding: 2px 6px; border-radius: 4px;
+        }
+
+        /* Logo cards */
+        .logo-row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
+        .logo-card {
+            background: #FFFFFF; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08); flex: 1; min-width: 320px;
+        }
+        .logo-display {
+            height: 140px; display: flex; align-items: center;
+            justify-content: center; padding: 32px;
+        }
+        .logo-display.light { background: #FFFFFF; }
+        .logo-display.dark { background: #11181C; }
+        .logo-display.blue { background: #4A6FA5; }
+        .logo-display.gold { background: #D8A23A; }
+        .logo-display.violet { background: #5B6B9D; }
+        .logo-display.sand { background: #F5F1EB; }
+        .logo-label {
+            font-size: 11px; color: #8A9094; padding: 12px 20px;
+            border-top: 1px solid #E5E7EB; background: #FAFBFC;
+        }
+
+        /* Product row */
+        .product-row {
+            display: flex; gap: 48px; align-items: center; flex-wrap: wrap;
+            padding: 32px; background: #FFFFFF; border-radius: 8px; margin-top: 16px;
+        }
+        .product-label {
+            font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: #8A9094; margin-bottom: 12px;
+        }
+
+        /* Combination grid */
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px; margin-bottom: 80px;
+        }
+        .combo-card {
+            background: #FFFFFF; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .combo-display {
+            height: 160px; display: flex; align-items: center;
+            justify-content: center; padding: 32px;
+        }
+        .combo-info {
+            padding: 16px 20px; border-top: 1px solid #E5E7EB; background: #FAFBFC;
+        }
+        .combo-info h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .combo-info p { font-size: 11px; color: #8A9094; }
+
+        /* Neutrals */
+        .neutral-strip {
+            display: flex; gap: 0; border-radius: 8px; overflow: hidden;
+            margin-bottom: 80px;
+        }
+        .neutral-chip {
+            flex: 1; padding: 24px; min-height: 100px;
+            display: flex; flex-direction: column; justify-content: flex-end;
+        }
+        .neutral-chip .name { font-size: 12px; font-weight: 500; margin-bottom: 4px; }
+        .neutral-chip .hex { font-family: 'SF Mono', Monaco, monospace; font-size: 11px; opacity: 0.7; }
+
+        /* Notes */
+        .notes {
+            background: #FFFFFF; border-radius: 8px; padding: 32px; margin-top: 40px;
+        }
+        .notes h3 { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+        .notes ul { list-style: none; font-size: 14px; color: #8A9094; }
+        .notes li { padding: 8px 0; padding-left: 20px; position: relative; }
+        .notes li::before { content: "—"; position: absolute; left: 0; color: #8A9094; }
+
+        /* Usage table */
+        .usage-table {
+            width: 100%; border-collapse: collapse;
+            margin-bottom: 80px; background: #FFFFFF;
+            border-radius: 8px; overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .usage-table th {
+            text-align: left; font-size: 11px; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: #8A9094; padding: 16px 24px;
+            border-bottom: 1px solid #E5E7EB; background: #FAFBFC;
+        }
+        .usage-table td {
+            padding: 16px 24px; font-size: 13px;
+            border-bottom: 1px solid #F0F1F2; vertical-align: middle;
+        }
+        .usage-table .swatch-sm {
+            width: 24px; height: 24px; border-radius: 4px;
+            display: inline-block; vertical-align: middle; margin-right: 10px;
+        }
+    
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h2 { font-size: 26px; }
+            .container { padding: 32px 24px; }
+            .palette-master { grid-template-columns: 1fr; gap: 24px; }
+            .story-box { padding: 24px; }
+            .flower-reference { flex-direction: column; align-items: flex-start; }
+            .colour-section { margin-bottom: 48px; }
+            .logo-row { flex-direction: column; }
+            .logo-card { min-width: 100%; }
+            .combo-grid { grid-template-columns: 1fr; }
+            .neutral-strip { flex-wrap: wrap; }
+            .neutral-chip { flex: 1 1 25%; min-width: 80px; }
+            .usage-table { font-size: 12px; }
+            .usage-table th, .usage-table td { padding: 12px 16px; }
+            .notes { padding: 24px; }
+        }
+        @media (max-width: 480px) {
+            .header h2 { font-size: 22px; }
+            .neutral-chip { flex: 1 1 50%; }
+            .usage-table th, .usage-table td { padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar"></div>
+
+<div class="header">
+        <h1>Brand Identity — Colour System</h1>
+        <h2>Trevarn — The Three Golds of Brittany</h2>
+        <p>A palette rooted in the land: the blue of flax flowers, the gold of the broom, and the violet-blue of linen in bloom. Three colours, three stories, one place.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MASTER PALETTE OVERVIEW                     -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <h2 class="section-title">Complete Palette</h2>
+
+        <div class="palette-master">
+            <!-- Primary: Aour Glaz -->
+            <div>
+                <div class="palette-column-header">Primary — Aour Glaz (Flax Blue)</div>
+                <div class="palette-column">
+                    <div class="palette-chip" style="background: #2A4470; color: #fff;">
+                        <span class="name">900 — Deep</span><span class="hex">#2A4470</span>
+                    </div>
+                    <div class="palette-chip" style="background: #3A5A8A; color: #fff;">
+                        <span class="name">700 — Dark</span><span class="hex">#3A5A8A</span>
+                    </div>
+                    <div class="palette-chip" style="background: #4A6FA5; color: #fff;">
+                        <span class="name">500 — Base ★</span><span class="hex">#4A6FA5</span>
+                    </div>
+                    <div class="palette-chip" style="background: #7BA3D4; color: #fff;">
+                        <span class="name">300 — Light</span><span class="hex">#7BA3D4</span>
+                    </div>
+                    <div class="palette-chip" style="background: #A8C4E8; color: #2A4470;">
+                        <span class="name">200 — Pale</span><span class="hex">#A8C4E8</span>
+                    </div>
+                    <div class="palette-chip" style="background: #E0EBF5; color: #2A4470;">
+                        <span class="name">50 — Wash</span><span class="hex">#E0EBF5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary: Aour Balan -->
+            <div>
+                <div class="palette-column-header">Secondary — Aour Balan (Broom Gold)</div>
+                <div class="palette-column">
+                    <div class="palette-chip" style="background: #8A6A1E; color: #fff;">
+                        <span class="name">900 — Deep</span><span class="hex">#8A6A1E</span>
+                    </div>
+                    <div class="palette-chip" style="background: #B8862E; color: #fff;">
+                        <span class="name">700 — Dark</span><span class="hex">#B8862E</span>
+                    </div>
+                    <div class="palette-chip" style="background: #D8A23A; color: #fff;">
+                        <span class="name">500 — Base ★</span><span class="hex">#D8A23A</span>
+                    </div>
+                    <div class="palette-chip" style="background: #E4BE6A; color: #5A4410;">
+                        <span class="name">300 — Light</span><span class="hex">#E4BE6A</span>
+                    </div>
+                    <div class="palette-chip" style="background: #F0D898; color: #5A4410;">
+                        <span class="name">200 — Pale</span><span class="hex">#F0D898</span>
+                    </div>
+                    <div class="palette-chip" style="background: #FAF0D8; color: #5A4410;">
+                        <span class="name">50 — Wash</span><span class="hex">#FAF0D8</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tertiary: Lin Violet -->
+            <div>
+                <div class="palette-column-header">Tertiary — Lin Violet (Flax Violet)</div>
+                <div class="palette-column">
+                    <div class="palette-chip" style="background: #3A4268; color: #fff;">
+                        <span class="name">900 — Deep</span><span class="hex">#3A4268</span>
+                    </div>
+                    <div class="palette-chip" style="background: #4A5580; color: #fff;">
+                        <span class="name">700 — Dark</span><span class="hex">#4A5580</span>
+                    </div>
+                    <div class="palette-chip" style="background: #5B6B9D; color: #fff;">
+                        <span class="name">500 — Base ★</span><span class="hex">#5B6B9D</span>
+                    </div>
+                    <div class="palette-chip" style="background: #8892B8; color: #fff;">
+                        <span class="name">300 — Light</span><span class="hex">#8892B8</span>
+                    </div>
+                    <div class="palette-chip" style="background: #B0B6D0; color: #3A4268;">
+                        <span class="name">200 — Pale</span><span class="hex">#B0B6D0</span>
+                    </div>
+                    <div class="palette-chip" style="background: #E4E6F0; color: #3A4268;">
+                        <span class="name">50 — Wash</span><span class="hex">#E4E6F0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- NEUTRALS                                    -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <h2 class="section-title">Neutrals</h2>
+
+        <div class="neutral-strip">
+            <div class="neutral-chip" style="background: #11181C; color: #fff;">
+                <span class="name">Ink</span><span class="hex">#11181C</span>
+            </div>
+            <div class="neutral-chip" style="background: #1F3A4A; color: #fff;">
+                <span class="name">Slate</span><span class="hex">#1F3A4A</span>
+            </div>
+            <div class="neutral-chip" style="background: #556970; color: #fff;">
+                <span class="name">Storm</span><span class="hex">#556970</span>
+            </div>
+            <div class="neutral-chip" style="background: #8A9094; color: #fff;">
+                <span class="name">Mist</span><span class="hex">#8A9094</span>
+            </div>
+            <div class="neutral-chip" style="background: #E5E7EB; color: #1F3A4A;">
+                <span class="name">Cloud</span><span class="hex">#E5E7EB</span>
+            </div>
+            <div class="neutral-chip" style="background: #F5F1EB; color: #1F3A4A;">
+                <span class="name">Sand</span><span class="hex">#F5F1EB</span>
+            </div>
+            <div class="neutral-chip" style="background: #F8F9FA; color: #1F3A4A;">
+                <span class="name">Pearl</span><span class="hex">#F8F9FA</span>
+            </div>
+            <div class="neutral-chip" style="background: #FFFFFF; color: #1F3A4A; border: 1px solid #E5E7EB;">
+                <span class="name">White</span><span class="hex">#FFFFFF</span>
+            </div>
+        </div>
+
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- PRIMARY: AOUR GLAZ                          -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <h2 class="section-title">Primary — Aour Glaz (Flax Blue)</h2>
+
+        <div class="story-box primary">
+            <h3>An Aour Glaz — The Blue Gold</h3>
+            <p>From the 16th to 18th centuries, the linen trade transformed Brittany into one of Europe's wealthiest regions. Flax seeds arrived from the Baltic at Roscoff, were cultivated in the Léon and Trégor, and the resulting toiles were exported worldwide via Morlaix, Landerneau, and Saint-Malo. The profits built the grand calvaires at Guimiliau, Pleyben, and Saint-Thégonnec — and the term "or bleu" (blue gold) referred to the delicate blue flowers of the flax plant that made it all possible.</p>
+        </div>
+
+        <div class="flower-reference blue">
+            <div class="flower-colours">
+                <span style="background: #A8C4E8;"></span>
+                <span style="background: #7BA3D4;"></span>
+                <span style="background: #5B8AC4;"></span>
+                <span style="background: #4A6FA5;"></span>
+            </div>
+            <div class="flower-text">
+                Flax flowers range from pale sky blue to bright blue-violet, with deeper blue veins radiating from the centre. These are darkened versions suitable for brand use.
+            </div>
+        </div>
+
+        <div class="colour-section">
+            <div class="colour-header">
+                <div class="colour-swatch" style="background: #4A6FA5;"></div>
+                <div class="colour-info">
+                    <h3>Aour Glaz — Flax Blue</h3>
+                    <p>Primary brand colour. Rich, warm, historically grounded. <code>#4A6FA5</code> · <code>rgb(74, 111, 165)</code> · <code>hsl(216, 38%, 47%)</code></p>
+                </div>
+            </div>
+            <div class="logo-row">
+                <div class="logo-card">
+                    <div class="logo-display light">
+                        <svg viewBox="0 0 280 28" width="260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#4A6FA5" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="60" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="24" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                        </svg>
+                    </div>
+                    <div class="logo-label">On white — primary usage</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-display dark">
+                        <svg viewBox="0 0 280 28" width="260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#FFFFFF" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="60" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="24" letter-spacing="0.12em" fill="#FFFFFF">TREVARN</text>
+                        </svg>
+                    </div>
+                    <div class="logo-label">On dark — reversed</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- SECONDARY: AOUR BALAN                       -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <h2 class="section-title">Secondary — Aour Balan (Broom Gold)</h2>
+
+        <div class="story-box secondary">
+            <h3>Aour Balan — Gold of the Broom</h3>
+            <p>The genêt à balais (Cytisus scoparius) — called <strong>balan</strong> in Breton — carpets the landes and coastlands of Brittany each spring in brilliant gold. So central is this plant to Breton identity that it gave French the word "balai" (broom) and named towns across the region: Bannalec in Finistère, Ploubazlanec in Côtes-d'Armor. Flowering branches were hung in houses and stables as protection — the broom was both humble and sacred, a plant of sweeping clean and fertile new beginnings.</p>
+        </div>
+
+        <div class="flower-reference gold">
+            <div class="flower-colours">
+                <span style="background: #FAF0D8;"></span>
+                <span style="background: #F0D898;"></span>
+                <span style="background: #E4BE6A;"></span>
+                <span style="background: #D8A23A;"></span>
+                <span style="background: #B8862E;"></span>
+            </div>
+            <div class="flower-text">
+                Genêt flowers range from pale lemon to deep golden-ochre. The base tone captures the warm, saturated gold of full bloom in late spring across the Breton moors.
+            </div>
+        </div>
+
+        <div class="colour-section">
+            <div class="colour-header">
+                <div class="colour-swatch" style="background: #D8A23A;"></div>
+                <div class="colour-info">
+                    <h3>Aour Balan — Broom Gold</h3>
+                    <p>Secondary brand colour. Warm, golden, energetic. <code>#D8A23A</code> · <code>rgb(216, 162, 58)</code> · <code>hsl(39, 68%, 54%)</code></p>
+                </div>
+            </div>
+            <div class="logo-row">
+                <div class="logo-card">
+                    <div class="logo-display light">
+                        <svg viewBox="0 0 260 56" width="220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="2,52 5,24 14,20 18,52 24,50 34,8 44,12 54,52 60,50 72,4 92,1 104,54" stroke="#4A6FA5" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="120" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                            <text x="120" y="48" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#D8A23A">DIFENN</text>
+                        </svg>
+                    </div>
+                    <div class="logo-label">Difenn product lockup — stacked on white</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-display dark">
+                        <svg viewBox="0 0 260 56" width="220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="2,52 5,24 14,20 18,52 24,50 34,8 44,12 54,52 60,50 72,4 92,1 104,54" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="120" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#FFFFFF">TREVARN</text>
+                            <text x="120" y="48" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#D8A23A">DIFENN</text>
+                        </svg>
+                    </div>
+                    <div class="logo-label">Difenn product lockup — stacked on dark</div>
+                </div>
+            </div>
+            <div class="logo-row">
+                <div class="logo-card">
+                    <div class="logo-display blue">
+                        <svg viewBox="0 0 260 56" width="220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="2,52 5,24 14,20 18,52 24,50 34,8 44,12 54,52 60,50 72,4 92,1 104,54" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="120" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="rgba(255,255,255,0.7)">TREVARN</text>
+                            <text x="120" y="48" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#D8A23A">DIFENN</text>
+                        </svg>
+                    </div>
+                    <div class="logo-label">Difenn product lockup — on Aour Glaz</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-display sand">
+                        <svg viewBox="0 0 260 56" width="220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="2,52 5,24 14,20 18,52 24,50 34,8 44,12 54,52 60,50 72,4 92,1 104,54" stroke="#4A6FA5" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="120" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                            <text x="120" y="48" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="0.12em" fill="#B8862E">DIFENN</text>
+                        </svg>
+                    </div>
+                    <div class="logo-label">Difenn product lockup — on Sand (print)</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TERTIARY: LIN VIOLET                        -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <h2 class="section-title">Tertiary — Lin Violet (Flax Violet)</h2>
+
+        <div class="story-box tertiary">
+            <h3>Lin Violet — The Other Blue of Flax</h3>
+            <p>Botanical sources describe the flax flower (Linum usitatissimum) as "pale blue to bright blue-violet, with deeper blue veins radiating from the centre." Lin Violet captures that violet undertone — the shadow side of the flax petal, the colour you see when the light shifts. Where Aour Glaz is the open-sky blue of the flower, Lin Violet is its twilight cousin: more introspective, more sophisticated, equally rooted in the same plant.</p>
+        </div>
+
+        <div class="flower-reference violet">
+            <div class="flower-colours">
+                <span style="background: #B0B6D0;"></span>
+                <span style="background: #8892B8;"></span>
+                <span style="background: #5B6B9D;"></span>
+                <span style="background: #4A5580;"></span>
+            </div>
+            <div class="flower-text">
+                The blue-violet range of flax petals. An alternative accent for contexts where the primary blue needs a softer or more contemplative companion.
+            </div>
+        </div>
+
+        <div class="colour-section">
+            <div class="colour-header">
+                <div class="colour-swatch" style="background: #5B6B9D;"></div>
+                <div class="colour-info">
+                    <h3>Lin Violet — Flax Violet</h3>
+                    <p>Tertiary / alternative accent. Sophisticated, warm-cool. <code>#5B6B9D</code> · <code>rgb(91, 107, 157)</code> · <code>hsl(225, 27%, 49%)</code></p>
+                </div>
+            </div>
+            <div class="logo-row">
+                <div class="logo-card">
+                    <div class="logo-display light">
+                        <svg viewBox="0 0 280 28" width="260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#5B6B9D" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="60" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="24" letter-spacing="0.12em" fill="#5B6B9D">TREVARN</text>
+                        </svg>
+                    </div>
+                    <div class="logo-label">On white — alternative accent use</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-display violet">
+                        <svg viewBox="0 0 280 28" width="260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#FFFFFF" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="60" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="24" letter-spacing="0.12em" fill="#FFFFFF">TREVARN</text>
+                        </svg>
+                    </div>
+                    <div class="logo-label">On Lin Violet — reversed</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- COLOUR COMBINATIONS                         -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <h2 class="section-title">Colour Combinations</h2>
+
+        <div class="combo-grid">
+            <!-- Blue + Gold -->
+            <div class="combo-card">
+                <div class="combo-display" style="background: #4A6FA5;">
+                    <svg viewBox="0 0 280 28" width="240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#FFFFFF" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="60" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="24" letter-spacing="0.12em" fill="#D8A23A">TREVARN</text>
+                    </svg>
+                </div>
+                <div class="combo-info">
+                    <h4>Aour Glaz + Aour Balan</h4>
+                    <p>Lin et Or — the classic flax and gold pairing. Primary combination.</p>
+                </div>
+            </div>
+
+            <!-- Blue + Violet -->
+            <div class="combo-card">
+                <div class="combo-display" style="background: #F8F9FA;">
+                    <div style="display: flex; gap: 24px; align-items: center;">
+                        <svg viewBox="0 0 50 28" width="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#4A6FA5" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span style="font-family: Inter, sans-serif; font-weight: 600; font-size: 24px; letter-spacing: 0.12em; color: #5B6B9D;">TREVARN</span>
+                    </div>
+                </div>
+                <div class="combo-info">
+                    <h4>Aour Glaz mark + Lin Violet text</h4>
+                    <p>Tonal pairing — blue mark with violet wordmark. Subtle, editorial.</p>
+                </div>
+            </div>
+
+            <!-- Gold on dark -->
+            <div class="combo-card">
+                <div class="combo-display" style="background: #11181C;">
+                    <svg viewBox="0 0 280 28" width="240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#D8A23A" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="60" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="24" letter-spacing="0.12em" fill="#D8A23A">TREVARN</text>
+                    </svg>
+                </div>
+                <div class="combo-info">
+                    <h4>Full Aour Balan on Ink</h4>
+                    <p>Premium, luxe. Use sparingly — events, special editions, dark UI.</p>
+                </div>
+            </div>
+
+            <!-- All three -->
+            <div class="combo-card">
+                <div class="combo-display" style="background: linear-gradient(135deg, #4A6FA5 0%, #5B6B9D 100%);">
+                    <svg viewBox="0 0 280 28" width="240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#D8A23A" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="60" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="24" letter-spacing="0.12em" fill="#FFFFFF">TREVARN</text>
+                    </svg>
+                </div>
+                <div class="combo-info">
+                    <h4>All three — gradient background</h4>
+                    <p>Glaz→Violet gradient with gold mark, white text. Hero/feature use.</p>
+                </div>
+            </div>
+
+            <!-- Warm combination -->
+            <div class="combo-card">
+                <div class="combo-display" style="background: #F5F1EB;">
+                    <svg viewBox="0 0 280 28" width="240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#4A6FA5" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="60" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="24" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                    </svg>
+                </div>
+                <div class="combo-info">
+                    <h4>Aour Glaz on Sand</h4>
+                    <p>Warm, approachable. For print, stationery, warm-toned contexts.</p>
+                </div>
+            </div>
+
+            <!-- Violet + Gold -->
+            <div class="combo-card">
+                <div class="combo-display" style="background: #5B6B9D;">
+                    <svg viewBox="0 0 280 28" width="240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="2.8,27.3 4.7,13.0 9.6,10.8 11.6,27.6 14.4,26.8 18.8,3.8 23.1,5.2 27.4,27.4 29.5,27.0 34.5,2.2 44.0,0.4 48.9,27.8" stroke="#D8A23A" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="60" y="24" font-family="Inter, sans-serif" font-weight="600" font-size="24" letter-spacing="0.12em" fill="#FFFFFF">TREVARN</text>
+                    </svg>
+                </div>
+                <div class="combo-info">
+                    <h4>Lin Violet + Aour Balan</h4>
+                    <p>Alternative premium. Violet background with gold accents.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- USAGE GUIDE                                 -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <h2 class="section-title">Usage Guide</h2>
+
+        <table class="usage-table">
+            <thead>
+                <tr>
+                    <th>Colour</th>
+                    <th>Role</th>
+                    <th>Use for</th>
+                    <th>Avoid</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="swatch-sm" style="background: #4A6FA5;"></span><strong>Aour Glaz</strong></td>
+                    <td>Primary</td>
+                    <td>Logo, headings, primary CTAs, links, brand moments</td>
+                    <td>Large background fills (use tints instead)</td>
+                </tr>
+                <tr>
+                    <td><span class="swatch-sm" style="background: #D8A23A;"></span><strong>Aour Balan</strong></td>
+                    <td>Secondary</td>
+                    <td>Accents, highlights, product branding (Difenn), badges, icons</td>
+                    <td>Body text (insufficient contrast on white)</td>
+                </tr>
+                <tr>
+                    <td><span class="swatch-sm" style="background: #5B6B9D;"></span><strong>Lin Violet</strong></td>
+                    <td>Tertiary</td>
+                    <td>Alternative accents, secondary navigation, illustrations, data viz</td>
+                    <td>Competing with Aour Glaz for primary role</td>
+                </tr>
+                <tr>
+                    <td><span class="swatch-sm" style="background: #1F3A4A;"></span><strong>Slate</strong></td>
+                    <td>Text primary</td>
+                    <td>Body text, headings on light backgrounds</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><span class="swatch-sm" style="background: #8A9094;"></span><strong>Mist</strong></td>
+                    <td>Text secondary</td>
+                    <td>Captions, labels, meta text, placeholders</td>
+                    <td>Primary content (too light)</td>
+                </tr>
+                <tr>
+                    <td><span class="swatch-sm" style="background: #F5F1EB;"></span><strong>Sand</strong></td>
+                    <td>Background warm</td>
+                    <td>Page backgrounds, cards, warm sections</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><span class="swatch-sm" style="background: #F8F9FA;"></span><strong>Pearl</strong></td>
+                    <td>Background cool</td>
+                    <td>Page backgrounds, sidebar, cool sections</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- DESIGN NOTES                                -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <div class="notes">
+            <h3>Palette Rationale</h3>
+            <ul>
+                <li><strong>Aour Glaz (#4A6FA5)</strong> — Named after the Breton term for "blue gold". A genuine connection to Brittany's flax trade history, not a marketing invention. The colour that built the calvaires.</li>
+                <li><strong>Aour Balan (#D8A23A)</strong> — Named after the Breton word for genêt (broom), the golden flower that defines the Breton lande. The word "balan" gave French the word "balai" and named Bannalec, Ploubazlanec. Blue and gold together = lin et or, flax and broom.</li>
+                <li><strong>Lin Violet (#5B6B9D)</strong> — The blue-violet undertone described in botanical sources for Linum usitatissimum. The twilight side of the same flax flower. Use as an alternative to Aour Glaz when a softer, more contemplative tone is needed.</li>
+                <li>All three colours trace back to two plants — flax (lin) and broom (balan/genêt) — both deeply rooted in Breton land and history.</li>
+                <li>The palette avoids generic tech-blue or startup-orange. Every colour has provenance.</li>
+                <li>Neutrals are named for the Breton coast: Ink, Slate, Storm, Mist, Cloud, Sand, Pearl.</li>
+            </ul>
+        </div>
+
+    </div>
+<script src="/components/navbar.js"></script>
+</body>
+</html>

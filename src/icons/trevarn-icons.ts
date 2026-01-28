@@ -1,0 +1,196 @@
+/**
+ * Trevarn Icon Registry
+ * =====================
+ * Canonical source of truth for all Trevarn/Difenn icons.
+ * Synced with /trevarn-icons.json and /trevarn-icons.svg
+ *
+ * Rules:
+ * - Icons are monochrome, stroke-based, currentColor only
+ * - Context sets colour, not the icon
+ * - No gradients, no fills, no multicolour icons
+ */
+
+export interface TrevarnIconDefinition {
+  id: TrevarnIconName
+  name: string
+  tags: readonly string[]
+}
+
+export const TREVARN_ICONS = [
+  // ─────────────────────────────────────────────────────────────
+  // DEVICE MANAGEMENT
+  // ─────────────────────────────────────────────────────────────
+  { id: "device-chip", name: "Chip / Sensor", tags: ["device", "sensor", "hardware", "iot"] },
+  { id: "device-swap", name: "Swap / Replace", tags: ["device", "swap", "replace", "transfer"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // HEALTH MONITORING
+  // ─────────────────────────────────────────────────────────────
+  { id: "health-heart", name: "Heart / Health", tags: ["health", "heart", "status", "vital"] },
+  { id: "health-pulse", name: "Pulse / Activity", tags: ["health", "pulse", "activity", "monitor"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // SUPPORT / ESCALATION
+  // ─────────────────────────────────────────────────────────────
+  { id: "support-escalate", name: "Escalate", tags: ["support", "escalate", "priority", "urgent"] },
+  { id: "support-lifebuoy", name: "Lifebuoy / Help", tags: ["support", "help", "lifebuoy", "rescue"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // DEPLOYMENT
+  // ─────────────────────────────────────────────────────────────
+  { id: "deploy-box", name: "Package / Deploy", tags: ["deploy", "package", "box", "ship"] },
+  { id: "deploy-checklist", name: "Checklist / Verify", tags: ["deploy", "checklist", "verify", "tasks"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // DISCOVERY
+  // ─────────────────────────────────────────────────────────────
+  { id: "discovery-radar", name: "Radar / Scan", tags: ["discovery", "radar", "scan", "detect"] },
+  { id: "discovery-search", name: "Search", tags: ["discovery", "search", "find", "lookup"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // JOB FORENSICS
+  // ─────────────────────────────────────────────────────────────
+  { id: "forensics-timeline", name: "Timeline", tags: ["forensics", "timeline", "history", "events"] },
+  { id: "forensics-clock", name: "Clock / Time", tags: ["forensics", "clock", "time", "duration"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // CONFIGURATION (ADVANCED)
+  // ─────────────────────────────────────────────────────────────
+  { id: "config-sliders", name: "Sliders / Parameters", tags: ["config", "sliders", "parameters", "settings"] },
+  { id: "config-gear", name: "Gear / Expert", tags: ["config", "gear", "settings", "expert"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // USERS & AUTHENTICATION
+  // ─────────────────────────────────────────────────────────────
+  { id: "user", name: "User", tags: ["user", "account", "person", "profile"] },
+  { id: "users", name: "Users / Team", tags: ["users", "team", "group", "people"] },
+  { id: "lock", name: "Lock", tags: ["lock", "secure", "private", "auth"] },
+  { id: "unlock", name: "Unlock", tags: ["unlock", "open", "access", "auth"] },
+  { id: "key", name: "Key", tags: ["key", "auth", "access", "credential"] },
+  { id: "shield", name: "Shield", tags: ["shield", "security", "protect", "safe"] },
+  { id: "logout", name: "Log Out", tags: ["logout", "signout", "exit", "auth"] },
+  { id: "login", name: "Log In", tags: ["login", "signin", "enter", "auth"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // ACTIONS
+  // ─────────────────────────────────────────────────────────────
+  { id: "plus", name: "Plus / Add", tags: ["plus", "add", "create", "new"] },
+  { id: "edit", name: "Edit / Pencil", tags: ["edit", "pencil", "modify", "change"] },
+  { id: "trash", name: "Trash / Delete", tags: ["trash", "delete", "remove", "destroy"] },
+  { id: "copy", name: "Copy", tags: ["copy", "duplicate", "clone"] },
+  { id: "download", name: "Download", tags: ["download", "save", "export"] },
+  { id: "upload", name: "Upload", tags: ["upload", "import", "send"] },
+  { id: "refresh", name: "Refresh / Sync", tags: ["refresh", "sync", "reload", "update"] },
+  { id: "share", name: "Share", tags: ["share", "send", "distribute"] },
+  { id: "link", name: "Link", tags: ["link", "chain", "url", "connect"] },
+  { id: "external-link", name: "External Link", tags: ["external", "link", "open", "new-window"] },
+  { id: "star", name: "Star / Favourite", tags: ["star", "favourite", "favorite", "bookmark"] },
+  { id: "bookmark", name: "Bookmark", tags: ["bookmark", "save", "mark"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // COMMUNICATION
+  // ─────────────────────────────────────────────────────────────
+  { id: "bell", name: "Bell / Notification", tags: ["bell", "notification", "alert", "notify"] },
+  { id: "mail", name: "Mail / Email", tags: ["mail", "email", "message", "envelope"] },
+  { id: "message", name: "Message / Chat", tags: ["message", "chat", "comment", "bubble"] },
+  { id: "phone", name: "Phone", tags: ["phone", "call", "contact", "telephone"] },
+  { id: "calendar", name: "Calendar", tags: ["calendar", "date", "schedule", "event"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // NAVIGATION
+  // ─────────────────────────────────────────────────────────────
+  { id: "home", name: "Home", tags: ["home", "house", "main", "start"] },
+  { id: "menu", name: "Menu / Hamburger", tags: ["menu", "hamburger", "nav", "bars"] },
+  { id: "x", name: "Close / X", tags: ["close", "x", "cancel", "dismiss"] },
+  { id: "more-horizontal", name: "More / Ellipsis", tags: ["more", "ellipsis", "options", "dots"] },
+  { id: "more-vertical", name: "More Vertical", tags: ["more", "ellipsis", "options", "dots", "vertical"] },
+  { id: "chevron-down", name: "Chevron Down", tags: ["chevron", "down", "expand", "arrow"] },
+  { id: "chevron-up", name: "Chevron Up", tags: ["chevron", "up", "collapse", "arrow"] },
+  { id: "chevron-right", name: "Chevron Right", tags: ["chevron", "right", "next", "arrow"] },
+  { id: "chevron-left", name: "Chevron Left", tags: ["chevron", "left", "back", "arrow"] },
+  { id: "arrow-up", name: "Arrow Up", tags: ["arrow", "up", "direction"] },
+  { id: "arrow-down", name: "Arrow Down", tags: ["arrow", "down", "direction"] },
+  { id: "arrow-left", name: "Arrow Left", tags: ["arrow", "left", "back", "direction"] },
+  { id: "arrow-right", name: "Arrow Right", tags: ["arrow", "right", "forward", "direction"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // STATUS & FEEDBACK
+  // ─────────────────────────────────────────────────────────────
+  { id: "check", name: "Check / Success", tags: ["check", "success", "done", "complete"] },
+  { id: "check-circle", name: "Check Circle", tags: ["check", "success", "circle", "complete"] },
+  { id: "x-circle", name: "X Circle / Error", tags: ["x", "error", "circle", "fail"] },
+  { id: "alert-triangle", name: "Alert / Warning", tags: ["alert", "warning", "triangle", "caution"] },
+  { id: "info", name: "Info", tags: ["info", "information", "help", "about"] },
+  { id: "help-circle", name: "Help / Question", tags: ["help", "question", "support", "faq"] },
+  { id: "alert-circle", name: "Alert Circle", tags: ["alert", "circle", "warning", "attention"] },
+  { id: "minus", name: "Minus", tags: ["minus", "subtract", "remove", "collapse"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // DATA & FILES
+  // ─────────────────────────────────────────────────────────────
+  { id: "file", name: "File / Document", tags: ["file", "document", "doc", "page"] },
+  { id: "file-text", name: "File Text", tags: ["file", "text", "document", "content"] },
+  { id: "folder", name: "Folder", tags: ["folder", "directory", "files"] },
+  { id: "database", name: "Database", tags: ["database", "db", "storage", "data"] },
+  { id: "server", name: "Server", tags: ["server", "host", "machine", "infrastructure"] },
+  { id: "cloud", name: "Cloud", tags: ["cloud", "storage", "saas", "online"] },
+  { id: "archive", name: "Archive", tags: ["archive", "inbox", "storage", "box"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // VIEW & LAYOUT
+  // ─────────────────────────────────────────────────────────────
+  { id: "grid", name: "Grid", tags: ["grid", "tiles", "layout", "view"] },
+  { id: "list", name: "List", tags: ["list", "rows", "layout", "view"] },
+  { id: "eye", name: "Eye / View", tags: ["eye", "view", "visible", "show"] },
+  { id: "eye-off", name: "Eye Off / Hide", tags: ["eye", "hide", "invisible", "hidden"] },
+  { id: "filter", name: "Filter", tags: ["filter", "funnel", "sort", "refine"] },
+  { id: "expand", name: "Expand / Maximise", tags: ["expand", "maximise", "fullscreen", "grow"] },
+  { id: "collapse", name: "Collapse / Minimise", tags: ["collapse", "minimise", "shrink", "reduce"] },
+  { id: "sidebar", name: "Sidebar", tags: ["sidebar", "panel", "layout", "nav"] },
+  { id: "layout", name: "Layout", tags: ["layout", "grid", "structure", "template"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // ANALYTICS & REPORTING
+  // ─────────────────────────────────────────────────────────────
+  { id: "chart-bar", name: "Bar Chart", tags: ["chart", "bar", "graph", "analytics"] },
+  { id: "chart-line", name: "Line Chart / Activity", tags: ["chart", "line", "activity", "graph"] },
+  { id: "chart-pie", name: "Pie Chart", tags: ["chart", "pie", "graph", "analytics"] },
+  { id: "trending-up", name: "Trending Up", tags: ["trending", "up", "growth", "increase"] },
+  { id: "trending-down", name: "Trending Down", tags: ["trending", "down", "decline", "decrease"] },
+  { id: "history", name: "Clock / History", tags: ["history", "clock", "time", "past"] },
+  { id: "globe", name: "Globe / World", tags: ["globe", "world", "international", "earth"] },
+  { id: "map-pin", name: "Location / Pin", tags: ["location", "pin", "map", "place"] },
+
+  // ─────────────────────────────────────────────────────────────
+  // CONNECTIVITY
+  // ─────────────────────────────────────────────────────────────
+  { id: "wifi", name: "Wifi", tags: ["wifi", "wireless", "signal", "network"] },
+  { id: "wifi-off", name: "Wifi Off", tags: ["wifi", "offline", "disconnected", "no-signal"] },
+  { id: "battery", name: "Battery", tags: ["battery", "power", "charge", "energy"] },
+  { id: "battery-low", name: "Battery Low", tags: ["battery", "low", "warning", "charge"] },
+  { id: "power", name: "Power", tags: ["power", "on", "off", "switch"] },
+  { id: "zap", name: "Zap / Lightning", tags: ["zap", "lightning", "fast", "electric"] },
+  { id: "smartphone", name: "Smartphone", tags: ["smartphone", "mobile", "phone", "device"] },
+  { id: "monitor", name: "Monitor / Desktop", tags: ["monitor", "desktop", "screen", "display"] },
+] as const satisfies readonly TrevarnIconDefinition[]
+
+/** Union type of all valid icon names */
+export type TrevarnIconName = (typeof TREVARN_ICONS)[number]["id"]
+
+/** Lookup icon definition by ID */
+export function getIcon(id: TrevarnIconName): TrevarnIconDefinition {
+  return TREVARN_ICONS.find((icon) => icon.id === id)!
+}
+
+/** Search icons by tag */
+export function searchIcons(tag: string): TrevarnIconDefinition[] {
+  const lower = tag.toLowerCase()
+  return TREVARN_ICONS.filter((icon) =>
+    icon.tags.some((t) => t.includes(lower))
+  )
+}
+
+/** Get all icon IDs */
+export function getAllIconIds(): TrevarnIconName[] {
+  return TREVARN_ICONS.map((icon) => icon.id)
+}

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>Trevarn — Typography</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/components/navbar.css">
+    <style>
+        :root {
+            --aour-glaz: #4A6FA5;
+            --aour-balan: #D8A23A;
+            --lin-violet: #5B6B9D;
+            --ink: #11181C;
+            --slate: #1F3A4A;
+            --mist: #8A9094;
+            --cloud: #E5E7EB;
+            --sand: #F5F1EB;
+            --pearl: #F8F9FA;
+            --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--pearl); color: var(--slate); line-height: 1.6;
+        }
+        .header {
+            background: var(--white); border-bottom: 1px solid var(--cloud);
+            padding: 48px 60px;
+        }
+        .header h1 {
+            font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--mist); margin-bottom: 8px;
+        }
+        .header h2 { font-size: 32px; font-weight: 600; color: var(--aour-glaz); font-family: 'IBM Plex Sans', sans-serif; }
+        .header .subtitle { font-size: 18px; font-weight: 300; color: var(--slate); margin-top: 4px; }
+        .header p { margin-top: 16px; color: var(--mist); font-size: 14px; max-width: 700px; }
+        .header .meta { margin-top: 20px; font-size: 11px; color: var(--mist); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px; }
+        .section-title {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--mist); margin-bottom: 12px;
+        }
+        .section-desc {
+            font-size: 14px; color: #666; margin-bottom: 32px; max-width: 700px; line-height: 1.7;
+        }
+        .divider { border: none; border-top: 1px solid var(--cloud); margin: 60px 0; }
+
+        .narrative {
+            background: var(--white); border-radius: 12px;
+            padding: 40px 48px; margin-bottom: 48px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--aour-glaz);
+        }
+        .narrative.gold { border-left-color: var(--aour-balan); }
+        .narrative.violet { border-left-color: var(--lin-violet); }
+        .narrative.mist { border-left-color: var(--mist); }
+        .narrative h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--slate); font-family: 'IBM Plex Sans', sans-serif; }
+        .narrative p { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .narrative p:last-child { margin-bottom: 0; }
+
+        /* Pairing cards */
+        .pairing-card {
+            background: var(--white); border-radius: 16px; overflow: hidden;
+            margin-bottom: 48px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .pairing-header {
+            padding: 32px 48px; border-bottom: 1px solid var(--cloud);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .pairing-header h3 { font-size: 20px; font-weight: 600; color: var(--slate); font-family: 'IBM Plex Sans', sans-serif; }
+        .pairing-header .tag {
+            display: inline-block; font-size: 10px; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--white); padding: 4px 10px; border-radius: 4px;
+        }
+        .tag.blue { background: var(--aour-glaz); }
+        .tag.gold { background: var(--aour-balan); }
+        .tag.dark { background: var(--slate); }
+        .tag.green { background: #2D8A4E; }
+
+        .pairing-demo {
+            padding: 48px; display: grid;
+            grid-template-columns: 1fr 1fr; gap: 48px;
+        }
+        .demo-left { border-right: 1px solid var(--cloud); padding-right: 48px; }
+        .demo-right { padding-left: 0; }
+
+        .demo-lockup {
+            margin-bottom: 40px; padding-bottom: 32px;
+            border-bottom: 1px solid #F0F1F2;
+        }
+        .demo-lockup svg { max-width: 100%; }
+
+        .demo-heading-stack .level {
+            margin-bottom: 16px; color: var(--slate);
+        }
+        .demo-heading-stack .level .label {
+            font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--mist); margin-bottom: 4px;
+        }
+
+        .demo-body-text { margin-top: 24px; }
+        .demo-body-text .body-label {
+            font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--mist); margin-bottom: 8px;
+        }
+        .demo-body-text p {
+            font-family: 'Inter', sans-serif; font-size: 15px;
+            color: #555; line-height: 1.8; margin-bottom: 12px;
+        }
+        .demo-body-text .mono-sample {
+            font-family: 'JetBrains Mono', monospace; font-size: 13px;
+            color: var(--aour-glaz); background: var(--pearl);
+            padding: 12px 16px; border-radius: 6px; margin-top: 16px;
+        }
+
+        .pairing-notes {
+            padding: 24px 48px; border-top: 1px solid var(--cloud);
+            background: #FAFBFC;
+        }
+        .pairing-notes h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--slate); }
+        .pairing-notes p { font-size: 13px; color: var(--mist); line-height: 1.7; }
+        .pairing-notes .pros-cons {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 12px;
+        }
+        .pairing-notes ul { font-size: 13px; color: #555; padding-left: 18px; line-height: 1.8; }
+
+        /* Wordmark spec */
+        .spec-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px;
+        }
+        .spec-card {
+            background: var(--white); border-radius: 12px; overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .spec-card-display {
+            padding: 48px 32px; display: flex; align-items: center;
+            justify-content: center; min-height: 120px;
+        }
+        .spec-card-label {
+            padding: 16px 24px; border-top: 1px solid var(--cloud); background: #FAFBFC;
+        }
+        .spec-card-label .spec-name {
+            font-size: 12px; font-weight: 600; color: var(--slate); margin-bottom: 4px;
+        }
+        .spec-card-label .spec-detail {
+            font-size: 11px; color: var(--mist); line-height: 1.6;
+        }
+        .spec-card-label code {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            background: var(--pearl); padding: 1px 5px; border-radius: 3px;
+        }
+
+        /* Mono section */
+        .mono-card {
+            background: var(--white); border-radius: 12px; padding: 40px 48px;
+            margin-bottom: 48px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--mist);
+        }
+        .mono-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--slate); font-family: 'IBM Plex Sans', sans-serif; }
+        .mono-sample-block {
+            font-family: 'JetBrains Mono', monospace; font-size: 14px;
+            background: var(--ink); color: #A8B2D1; padding: 24px 32px;
+            border-radius: 8px; line-height: 1.8; margin: 16px 0;
+        }
+        .mono-sample-block .comment { color: #546178; }
+        .mono-sample-block .keyword { color: var(--aour-glaz); }
+        .mono-sample-block .string { color: var(--aour-balan); }
+        .mono-sample-block .number { color: #C792EA; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h2 { font-size: 26px; }
+            .header .subtitle { font-size: 16px; }
+            .container { padding: 32px 24px; }
+            .narrative { padding: 28px 24px; margin-bottom: 32px; }
+            .narrative h3 { font-size: 16px; }
+            .spec-grid { grid-template-columns: 1fr; }
+            .pairing-card { margin-bottom: 32px; }
+            .pairing-header { padding: 24px; }
+            .pairing-header h3 { font-size: 18px; }
+            .pairing-demo { grid-template-columns: 1fr; padding: 24px; }
+            .demo-left { border-right: none; border-bottom: 1px solid var(--cloud); padding-right: 0; padding-bottom: 32px; margin-bottom: 32px; }
+            .demo-heading-stack .level div[style*="font-size: 40px"] { font-size: 28px !important; }
+            .demo-heading-stack .level div[style*="font-size: 28px"] { font-size: 22px !important; }
+            .pairing-notes { padding: 20px 24px; }
+            .pairing-notes .pros-cons { grid-template-columns: 1fr; }
+            .mono-card { padding: 28px 24px; }
+            .divider { margin: 40px 0; }
+        }
+        @media (max-width: 480px) {
+            .header h2 { font-size: 22px; }
+            .header .subtitle { font-size: 14px; }
+            .narrative { padding: 20px 16px; }
+            .pairing-header { padding: 20px 16px; }
+            .pairing-demo { padding: 20px 16px; }
+            .demo-lockup svg { width: 100%; max-width: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-bar"></div>
+
+<div class="header">
+    <h1>Trevarn — Brand Guidelines</h1>
+    <h2>Typography</h2>
+    <div class="subtitle">Wordmark specification, display type, body and mono</div>
+    <p>The Trevarn type system is built for clarity and authority. IBM Plex Sans for headings brings industrial heritage and engineering credibility. Inter for body text provides exceptional legibility across all contexts. JetBrains Mono handles technical content.</p>
+    <div class="meta">January 2026</div>
+</div>
+
+<div class="container">
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- WORDMARK SPECIFICATION                                  -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Wordmark Specification</h2>
+    <p class="section-desc">The TREVARN wordmark is set in Inter SemiBold with wide letter-spacing. This is the typographic anchor of the brand — all display type decisions flow from this foundation.</p>
+
+    <div class="spec-grid">
+        <div class="spec-card">
+            <div class="spec-card-display" style="background: var(--white);">
+                <svg viewBox="0 0 420 50" width="380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2.3,40.1 5.6,19.0 13.2,15.8 16.5,40.6 20.6,39.4 27.3,5.6 33.9,7.6 40.6,40.3 43.8,39.8 51.5,3.3 66.1,0.6 73.6,41.0" stroke="#4A6FA5" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="92" y="35" font-family="Inter, sans-serif" font-weight="600" font-size="32" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                </svg>
+            </div>
+            <div class="spec-card-label">
+                <div class="spec-name">Primary lockup — full scale</div>
+                <div class="spec-detail">
+                    Font: <code>Inter</code> Weight: <code>600 (SemiBold)</code><br>
+                    Case: <code>uppercase</code> Letter-spacing: <code>0.12em</code>
+                </div>
+            </div>
+        </div>
+        <div class="spec-card">
+            <div class="spec-card-display" style="background: var(--ink);">
+                <svg viewBox="0 0 420 50" width="380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2.3,40.1 5.6,19.0 13.2,15.8 16.5,40.6 20.6,39.4 27.3,5.6 33.9,7.6 40.6,40.3 43.8,39.8 51.5,3.3 66.1,0.6 73.6,41.0" stroke="#FFFFFF" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="92" y="35" font-family="Inter, sans-serif" font-weight="600" font-size="32" letter-spacing="0.12em" fill="#FFFFFF">TREVARN</text>
+                </svg>
+            </div>
+            <div class="spec-card-label">
+                <div class="spec-name">Reversed lockup — dark backgrounds</div>
+                <div class="spec-detail">
+                    Same specification. White on dark: <code>#FFFFFF</code> on <code>#11181C</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="narrative mist">
+        <h3>Why Inter for the Wordmark?</h3>
+        <p>Inter's geometric construction — open counters, consistent stroke widths, rational proportions — shares the same design DNA as the mark itself: precise, systematic, built for clarity at any scale. The wide letter-spacing (0.12em) gives each character room to breathe, echoing the distinct spacing of the three standing stones in the mark.</p>
+        <p>The wordmark is <strong>not</strong> custom-drawn. It uses an off-the-shelf font at specific settings. This is deliberate — it reinforces Trevarn's engineering-first identity. The mark provides all the personality; the wordmark provides legibility and authority.</p>
+    </div>
+
+    <div class="narrative">
+        <h3>Wordmark CSS Reference</h3>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; background: var(--ink); color: #A8B2D1; padding: 20px 28px; border-radius: 8px; line-height: 1.8; margin-top: 12px;">
+            <span style="color: #546178;">/* Trevarn wordmark — typographic specification */</span><br>
+            <span style="color: var(--aour-glaz);">font-family</span>: 'Inter', sans-serif;<br>
+            <span style="color: var(--aour-glaz);">font-weight</span>: <span style="color: #C792EA;">600</span>;<br>
+            <span style="color: var(--aour-glaz);">text-transform</span>: uppercase;<br>
+            <span style="color: var(--aour-glaz);">letter-spacing</span>: <span style="color: #C792EA;">0.12em</span>;<br>
+            <span style="color: var(--aour-glaz);">color</span>: <span style="color: var(--aour-balan);">#4A6FA5</span>; <span style="color: #546178;">/* Aour Glaz */</span>
+        </div>
+        <p style="margin-top: 16px; font-size: 12px; color: var(--mist);">SVG equivalent: <code style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--pearl); padding: 2px 6px; border-radius: 3px;">font-weight="600" letter-spacing="0.12em"</code></p>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- THE TYPE SYSTEM                                         -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <div class="narrative">
+        <h3>The Type System</h3>
+        <p>Three roles, three typefaces:</p>
+        <p><strong>Display / Headings (IBM Plex Sans):</strong> H1-H3, hero text, pull quotes. The primary voice of the brand in context. IBM Plex Sans brings industrial credibility and engineering heritage — serious, proven, authoritative.</p>
+        <p><strong>Body / UI (Inter):</strong> Body copy, navigation, UI elements, captions. The same typeface as the wordmark, but at regular weight and normal tracking. Highly legible at all sizes, neutral enough to recede behind the content.</p>
+        <p><strong>Technical / Mono (JetBrains Mono):</strong> Code samples, data tables, technical specifications, sensor IDs, API references.</p>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- DISPLAY TYPEFACE — IBM PLEX SANS                        -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Display Typeface</h2>
+
+    <div class="pairing-card">
+        <div class="pairing-header">
+            <h3>IBM Plex Sans + Inter</h3>
+            <span class="tag green">Locked</span>
+        </div>
+        <div class="pairing-demo">
+            <div class="demo-left">
+                <div class="demo-lockup">
+                    <svg viewBox="0 0 320 38" width="300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8" stroke="#4A6FA5" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="78" y="29" font-family="Inter, sans-serif" font-weight="600" font-size="26" letter-spacing="0.12em" fill="#4A6FA5">TREVARN</text>
+                    </svg>
+                </div>
+                <div class="demo-heading-stack">
+                    <div class="level">
+                        <div class="label">H1 — 40px / 700</div>
+                        <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 40px; font-weight: 700; line-height: 1.2;">Built on Solid Ground</div>
+                    </div>
+                    <div class="level">
+                        <div class="label">H2 — 28px / 600</div>
+                        <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 28px; font-weight: 600; line-height: 1.3;">Infrastructure That Endures</div>
+                    </div>
+                    <div class="level">
+                        <div class="label">H3 — 20px / 600</div>
+                        <div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 20px; font-weight: 600; line-height: 1.4;">Connected Sensors for Safety-Critical Environments</div>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-right">
+                <div class="demo-body-text">
+                    <div class="body-label">Body — Inter 15px</div>
+                    <p>Trevarn builds connected monitoring systems for safety-critical environments. Our IoT sensor networks detect anomalies before they become failures, delivering real-time analytics that protect workers and assets.</p>
+                    <p style="color: var(--aour-glaz);">
+                        <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 20px; font-weight: 400; line-height: 1.5;">"The best things are rooted in real places, made by real people, and designed to stand the test of time."</span>
+                    </p>
+                    <div class="mono-sample">
+                        sensor.id: TRV-2847-A1 &middot; status: active &middot; uptime: 99.97%
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pairing-notes">
+            <h4>Why IBM Plex Sans</h4>
+            <p style="color: var(--slate); margin-bottom: 12px;">IBM Plex Sans was designed by Mike Abbink for IBM — a company synonymous with enterprise infrastructure, reliability, and engineering excellence. The typeface carries that DNA: <strong>serious, functional, proven at scale</strong>. It reads as infrastructure, not startup.</p>
+            <p style="color: var(--slate); margin-bottom: 16px;">The letterforms are neutral but not bland — subtle humanist touches prevent it from feeling cold, while the overall structure remains firmly industrial. This balance mirrors Trevarn's brand voice: quietly confident, technically precise, but not sterile.</p>
+            <h4>Characteristics</h4>
+            <div class="pros-cons">
+                <div>
+                    <strong style="color: #2D8A4E; font-size: 11px; letter-spacing: 0.06em;">STRENGTHS</strong>
+                    <ul>
+                        <li>Industrial heritage — designed for IBM, reads as enterprise-grade</li>
+                        <li>Proven at massive scale across IBM's global presence</li>
+                        <li>Complete family: Sans, Serif, Mono — future flexibility</li>
+                        <li>Weight range 100–700 covers all heading needs</li>
+                        <li>Includes true italics for emphasis</li>
+                        <li>Free and open source (OFL)</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong style="color: var(--mist); font-size: 11px; letter-spacing: 0.06em;">CONSIDERATIONS</strong>
+                    <ul>
+                        <li>Widely used — won't stand out as distinctive</li>
+                        <li>Sans + sans pairing requires careful weight contrast</li>
+                        <li>Neutral character means the mark does the heavy lifting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- BODY TEXT — INTER                                       -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Body Text</h2>
+
+    <div class="narrative">
+        <h3>Inter <span style="font-weight: 300; color: var(--mist);">— locked</span></h3>
+        <p>Inter is the body typeface across all Trevarn materials. It is also the wordmark typeface at different settings. This dual role is deliberate — it creates a unified typographic identity where the wordmark and the content share the same underlying structure.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 20px;">
+            <div>
+                <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); margin-bottom: 8px;">Body settings</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--aour-glaz); background: var(--pearl); padding: 16px 20px; border-radius: 6px; line-height: 1.8;">
+                    font-weight: 400<br>
+                    font-size: 15–16px<br>
+                    line-height: 1.7–1.8<br>
+                    letter-spacing: normal
+                </div>
+            </div>
+            <div>
+                <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); margin-bottom: 8px;">UI / Caption settings</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--aour-glaz); background: var(--pearl); padding: 16px 20px; border-radius: 6px; line-height: 1.8;">
+                    font-weight: 400–500<br>
+                    font-size: 12–14px<br>
+                    line-height: 1.4–1.6<br>
+                    letter-spacing: 0.01em
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- TECHNICAL / MONO                                        -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Technical / Monospace</h2>
+
+    <div class="mono-card">
+        <h3>JetBrains Mono <span style="font-weight: 300; color: var(--mist);">— locked</span></h3>
+        <p style="font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 16px;">For code samples, technical specifications, data tables, sensor IDs, API references. Clean, modern monospace with excellent legibility. Increased letter height for improved readability at small sizes.</p>
+        <div class="mono-sample-block">
+            <span class="comment">// Trevarn Difenn — sensor telemetry</span><br>
+            <span class="keyword">const</span> reading = {<br>
+            &nbsp;&nbsp;sensor_id: <span class="string">"TRV-2847-A1"</span>,<br>
+            &nbsp;&nbsp;timestamp: <span class="string">"2026-01-28T14:32:00Z"</span>,<br>
+            &nbsp;&nbsp;strain_µε: <span class="number">142.7</span>,<br>
+            &nbsp;&nbsp;temperature_c: <span class="number">8.3</span>,<br>
+            &nbsp;&nbsp;status: <span class="string">"nominal"</span><br>
+            };
+        </div>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- LOCKED TYPE SYSTEM                                      -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <div style="background: var(--white); border-radius: 12px; padding: 40px 48px; margin-top: 60px; border: 2px solid #2D8A4E;">
+        <h3 style="font-family: 'IBM Plex Sans', sans-serif; font-size: 18px; font-weight: 600; color: #2D8A4E; margin-bottom: 20px;">Locked Type System</h3>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <thead>
+                <tr>
+                    <th style="text-align:left; font-weight:600; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--mist); padding:10px 12px; border-bottom:1px solid var(--cloud);">Role</th>
+                    <th style="text-align:left; font-weight:600; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--mist); padding:10px 12px; border-bottom:1px solid var(--cloud);">Typeface</th>
+                    <th style="text-align:left; font-weight:600; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--mist); padding:10px 12px; border-bottom:1px solid var(--cloud);">Settings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2; font-weight:500; color:var(--slate);"><strong>Wordmark</strong></td>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2;">Inter</td>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2;">Weight 600 · uppercase · letter-spacing 0.12em · Aour Glaz</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2; font-weight:500; color:var(--slate);"><strong>Display / Headings</strong></td>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2;">IBM Plex Sans</td>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2;">H1: 700 · H2: 600 · H3: 600</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2; font-weight:500; color:var(--slate);"><strong>Body / UI</strong></td>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2;">Inter</td>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2;">Weight 400 · 15–16px · line-height 1.7–1.8</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2; font-weight:500; color:var(--slate);"><strong>Technical / Mono</strong></td>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2;">JetBrains Mono</td>
+                    <td style="padding:12px; border-bottom:1px solid #F0F1F2;">Weight 400–500 · code, data, sensor IDs</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<script src="/components/navbar.js"></script>
+</body>
+</html>

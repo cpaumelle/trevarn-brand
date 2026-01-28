@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>Trevarn — Mark Origins</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/components/navbar.css">
+    <style>
+        :root {
+            --aour-glaz: #4A6FA5;
+            --aour-balan: #D8A23A;
+            --lin-violet: #5B6B9D;
+            --ink: #11181C;
+            --slate: #1F3A4A;
+            --mist: #8A9094;
+            --cloud: #E5E7EB;
+            --sand: #F5F1EB;
+            --pearl: #F8F9FA;
+            --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--pearl); color: var(--slate); line-height: 1.6;
+        }
+        .header {
+            background: var(--white); border-bottom: 1px solid var(--cloud);
+            padding: 48px 60px;
+        }
+        .header h1 {
+            font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--mist); margin-bottom: 8px;
+        }
+        .header h2 { font-size: 32px; font-weight: 600; color: var(--aour-glaz); font-family: 'IBM Plex Sans', sans-serif; }
+        .header .subtitle { font-size: 18px; font-weight: 300; color: var(--slate); margin-top: 4px; }
+        .header p { margin-top: 16px; color: var(--mist); font-size: 14px; max-width: 700px; }
+        .header .meta { margin-top: 20px; font-size: 11px; color: var(--mist); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px; }
+        .section-title {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--mist); margin-bottom: 12px;
+        }
+
+        .narrative {
+            background: var(--white); border-radius: 12px;
+            padding: 40px 48px; margin-bottom: 48px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--aour-glaz);
+        }
+        .narrative h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--slate); font-family: 'IBM Plex Sans', sans-serif; }
+        .narrative h3 .light { font-weight: 300; color: var(--mist); }
+        .narrative p { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .narrative p:last-of-type { margin-bottom: 0; }
+        .narrative.gold { border-left-color: var(--aour-balan); }
+        .narrative.violet { border-left-color: var(--lin-violet); }
+        .narrative blockquote {
+            margin: 20px 0; padding: 16px 24px;
+            background: var(--pearl); border-radius: 6px;
+            font-size: 14px; color: var(--slate);
+            font-style: italic; line-height: 1.7;
+        }
+        .narrative .source {
+            font-size: 11px; color: var(--mist); margin-top: 4px;
+            font-style: normal;
+        }
+
+        .divider { border: none; border-top: 1px solid var(--cloud); margin: 60px 0; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h2 { font-size: 26px; }
+            .header .subtitle { font-size: 16px; }
+            .container { padding: 32px 24px; }
+            .narrative { padding: 28px 24px; margin-bottom: 32px; }
+            .narrative h3 { font-size: 16px; }
+            .narrative blockquote { padding: 12px 16px; }
+            .divider { margin: 40px 0; }
+            table { font-size: 12px; }
+            table th, table td { padding: 8px 10px; }
+            .compare-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+            .header h2 { font-size: 22px; }
+            .header .subtitle { font-size: 14px; }
+            .narrative { padding: 20px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-bar"></div>
+
+<div class="header">
+    <h1>Trevarn — Brand Guidelines</h1>
+    <h2>Mark Origins</h2>
+    <div class="subtitle">Standing stones, controlled disorder, and a pioneer of computer art</div>
+    <p>The Trevarn mark draws from two sources: Brittany's ancient menhirs and the techniques of Vera Molnár, one of the most important figures in the history of computer-generated art.</p>
+    <div class="meta">January 2026</div>
+</div>
+
+<div class="container">
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- THE MENHIRS                                             -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">The Menhirs</h2>
+
+    <div class="narrative">
+        <h3>Standing Stones of Brittany</h3>
+        <p>The word "menhir" comes from the Breton <em>men</em> (stone) and <em>hir</em> (long). Brittany has the highest concentration of megalithic sites in the world — over 3,000 standing stones dot the landscape, the most famous being the alignments at Carnac: 3,000 individual menhirs arranged in rows stretching nearly four kilometres.</p>
+        <p>These stones have stood for 6,000 years. They were old when the pyramids were built. They have weathered Atlantic storms, watched Celtic tribes come and go, seen the Romans and the Vikings and the Bretons themselves settle the land. Each stone leans slightly, tilted by millennia of soil movement and wind. No two are alike.</p>
+        <p>The Trevarn mark is three ascending menhirs — small, medium, large — representing growth, stability, and aspiration. They are not identical; like real standing stones, <strong>each has its own character</strong>.</p>
+        <figure style="margin-top: 24px;">
+            <img src="/images/carnac-menhirs.jpg" alt="Standing stones at Carnac, Brittany" style="width: 100%; border-radius: 8px; display: block;">
+            <figcaption style="font-size: 11px; color: var(--mist); margin-top: 10px; line-height: 1.5;">Menhirs at Carnac, Brittany — over 3,000 standing stones arranged in rows across nearly four kilometres. Each stone leans, tilts, and weathers differently. Photo: <a href="https://unsplash.com/@adrien_s" style="color: var(--aour-glaz);">Adrien S</a> / Unsplash</figcaption>
+        </figure>
+    </div>
+
+    <div class="narrative gold">
+        <h3>Three Individuals, Not Three Copies</h3>
+        <p>Real menhirs lean, tilt, and weather differently. The three stones in this mark each have their own personality:</p>
+        <table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:13px;">
+            <thead><tr><th style="text-align:left; padding:8px 12px; border-bottom:1px solid #E5E7EB; color:#8A9094; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;">Stone</th><th style="text-align:left; padding:8px 12px; border-bottom:1px solid #E5E7EB; color:#8A9094; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;">Character</th><th style="text-align:left; padding:8px 12px; border-bottom:1px solid #E5E7EB; color:#8A9094; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;">Details</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td style="padding:10px 12px; border-bottom:1px solid #F0F1F2;"><strong>Small (left)</strong></td>
+                    <td style="padding:10px 12px; border-bottom:1px solid #F0F1F2;">Leans right, narrow top</td>
+                    <td style="padding:10px 12px; border-bottom:1px solid #F0F1F2;">Left edge steep, right edge gradual. Top tilts down-left. Compact, dense.</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px 12px; border-bottom:1px solid #F0F1F2;"><strong>Medium (centre)</strong></td>
+                    <td style="padding:10px 12px; border-bottom:1px solid #F0F1F2;">Leans left, broader shoulders</td>
+                    <td style="padding:10px 12px; border-bottom:1px solid #F0F1F2;">Right edge steeper than left. Top tilts opposite to stone 1. More open stance.</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px 12px; border-bottom:1px solid #F0F1F2;"><strong>Large (right)</strong></td>
+                    <td style="padding:10px 12px; border-bottom:1px solid #F0F1F2;">Near-upright, asymmetric edges</td>
+                    <td style="padding:10px 12px; border-bottom:1px solid #F0F1F2;">Left edge much steeper than right. Wider flat top. The anchor — most mass, most presence.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- VERA MOLNÁR                                             -->
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <h2 class="section-title">Vera Molnár</h2>
+
+    <div class="narrative">
+        <h3>A Pioneer of Computer Art <span class="light">1924–2023</span></h3>
+        <p>Vera Molnár was a Hungarian-French artist who became one of the most important figures in the history of computer-generated art. Born in Budapest in 1924, she moved to Paris in 1947 and began exploring systematic, rule-based art long before computers were accessible to artists.</p>
+        <p>In 1968, she gained access to a computer at a research lab in Paris and began writing programs to generate visual art — one of the first artists in the world to do so. For the next five decades, she explored the territory between geometric order and organic variation, creating thousands of works that demonstrated how algorithmic rules could produce images with life and personality.</p>
+        <p>Molnár worked until her death in 2023 at age 99, still writing code, still exploring. Her influence spans the entire field of generative art, and her techniques are now embedded in the visual DNA of computational design.</p>
+    </div>
+
+    <div class="narrative">
+        <h3>1-2% de Désordre</h3>
+        <p>Molnár's central insight was that <strong>pure geometry is dead, but pure randomness is noise</strong>. The interesting territory is in between: structures with just enough irregularity to feel alive.</p>
+        <blockquote>
+            "I introduce a bit of mess: some random irregularities here and there, combining order and disorder."
+            <div class="source">— Vera Molnár</div>
+        </blockquote>
+        <p>She called this "1-2% de désordre" — the minimum amount of controlled perturbation needed to make a geometric form feel organic rather than mechanical. Not chaos, but <em>almost</em> order. The eye recognises the underlying structure while simultaneously perceiving that something is subtly, pleasingly wrong.</p>
+        <p>This technique is now fundamental to generative design. The Trevarn mark uses 2% disorder: every vertex is shifted slightly from its mathematically perfect position. Edges wander. Baselines tilt. The mark feels weathered, geological, hand-made — even though it was drawn by code.</p>
+        <figure style="margin-top: 24px;">
+            <img src="/images/molnar-tout-petit-desordre-1975.jpg" alt="Vera Molnár, Tout petit désordre, 1975" style="width: 100%; max-width: 500px; border-radius: 8px; display: block;">
+            <figcaption style="font-size: 11px; color: var(--mist); margin-top: 10px; line-height: 1.5;">Vera Molnár, <em>Tout petit désordre</em>, 1975. Computer drawing, plotter on Benson paper, 47 × 31 cm. Courtesy <a href="https://www.oniris.art/en/artists/32-vera-molnar/works/5404-vera-molnar-tout-petit-desordre-75.023-15.00.31-1975/" style="color: var(--aour-glaz);">Galerie Oniris, Rennes</a></figcaption>
+        </figure>
+    </div>
+
+    <div class="narrative violet">
+        <h3>Montagne Sainte-Victoire <span class="light">1987 onwards</span></h3>
+        <p>Molnár's most celebrated series reimagines Cézanne's iconic mountain — the same subject he painted over 80 times — through algorithmic means. She described seeing the Gaussian bell curve in the mountain's silhouette, then systematically deconstructing it.</p>
+        <p>The series spans decades and thousands of variations. She wrote:</p>
+        <blockquote>
+            "The number of back and forth increased from 2 to 32... the line also went thicker along the way."
+            <div class="source">— Vera Molnár, on Montagne Sainte-Victoire series</div>
+        </blockquote>
+        <p>Her object-book of the series offers "exactly 6,765,201 versions of Montagne Sainte-Victoire" — the same form endlessly recombined through algorithmic rules. This is the spirit behind the Trevarn mark: a form that feels singular and intentional, but is actually part of an infinite family of possible variations.</p>
+        <figure style="margin-top: 24px;">
+            <div class="compare-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: end;">
+                <figure style="margin: 0;">
+                    <img src="/images/cezanne-sainte-victoire.jpg" alt="Paul Cézanne, Montagne Sainte-Victoire" style="width: 100%; border-radius: 8px; display: block;">
+                    <figcaption style="font-size: 11px; color: var(--mist); margin-top: 10px; line-height: 1.5;">Paul Cézanne, <em>Montagne Sainte-Victoire</em>, c. 1887. Oil on canvas. Cézanne painted this mountain over 80 times. <a href="https://commons.wikimedia.org/wiki/File:Paul_C%C3%A9zanne_-_Montagne_Saint-victoire_-_Google_Art_Project.jpg" style="color: var(--aour-glaz);">Wikimedia Commons</a></figcaption>
+                </figure>
+                <figure style="margin: 0;">
+                    <img src="/images/molnar-sainte-victoire-cnap.jpg" alt="Vera Molnár, Sainte Victoire on line" style="width: 100%; border-radius: 8px; display: block;">
+                    <figcaption style="font-size: 11px; color: var(--mist); margin-top: 10px; line-height: 1.5;">Vera Molnár, <em>Sainte Victoire on line</em>. The same mountain, reduced to algorithmic geometry. <a href="https://www.cnap.fr/" style="color: var(--aour-glaz);">CNAP</a></figcaption>
+                </figure>
+            </div>
+        </figure>
+    </div>
+
+    <div class="narrative">
+        <h3>The Continuous Line</h3>
+        <p>Many of Molnár's works use a continuous-line technique — a single unbroken path generating complex structures. The pen never lifts. Form emerges from the wandering of a single mark.</p>
+        <p>The Trevarn mark borrows this technique directly. The three menhirs are traced by <strong>one continuous polyline</strong>: the pen starts at the base of the first stone, rises up its left edge, crosses its top, descends the right edge, travels along the baseline to the next stone, and repeats. Twelve vertices, one path, three forms.</p>
+        <p>At small sizes (favicon, app icon), the connecting baseline becomes hard to read. For these contexts, the mark can be rendered as <strong>three discrete polygons</strong> — the same stone shapes, now separated.</p>
+        <figure style="margin-top: 24px;">
+            <img src="/images/molnar-ligne-vagabonde-1998.jpg" alt="Vera Molnár, Une Ligne Vagabonde, 1998" style="width: 100%; max-width: 600px; border-radius: 8px; display: block;">
+            <figcaption style="font-size: 11px; color: var(--mist); margin-top: 10px; line-height: 1.5;">Vera Molnár, <em>Une Ligne Vagabonde</em>, 1998. A single continuous line wanders across the surface of multiple canvases — the pen never lifts. Courtesy <a href="https://www.oniris.art/en/artists/32-vera-molnar/" style="color: var(--aour-glaz);">Galerie Oniris, Rennes</a></figcaption>
+        </figure>
+    </div>
+
+</div>
+<script src="/components/navbar.js"></script>
+</body>
+</html>

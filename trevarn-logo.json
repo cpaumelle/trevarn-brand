@@ -1,0 +1,77 @@
+{
+  "name": "Trevarn Logo Mark",
+  "description": "The three menhirs of Brittany - standing stones rendered as continuous line or discrete forms",
+  "version": "1.0.0",
+  "sprite": "/trevarn-logo.svg",
+  "favicon": "/favicon.svg",
+  "spec": {
+    "viewBox": "0 0 64 38",
+    "aspectRatio": "64:38",
+    "strokeWidth": 1.8,
+    "strokeLinecap": "round",
+    "strokeLinejoin": "round",
+    "stroke": "currentColor"
+  },
+  "colors": {
+    "primary": {
+      "glaz": "#4A6FA5",
+      "description": "Flax blue - default brand color"
+    },
+    "secondary": {
+      "balan": "#D8A23A",
+      "description": "Broom gold - accent"
+    },
+    "monochrome": {
+      "ink": "#11181C",
+      "white": "#FFFFFF"
+    }
+  },
+  "variants": [
+    {
+      "id": "mark-stroke",
+      "name": "Primary Mark (Stroke)",
+      "description": "Three discrete stones, stroke-based outline",
+      "use": ["headers", "navigation", "large display", "print"],
+      "minSize": 40
+    },
+    {
+      "id": "mark-filled",
+      "name": "Filled Mark",
+      "description": "Three discrete stones, solid fill",
+      "use": ["favicons", "app icons", "small sizes"],
+      "minSize": 16,
+      "maxSize": 32
+    },
+    {
+      "id": "mark-continuous",
+      "name": "Continuous Line",
+      "description": "Single unbroken polyline connecting all stones",
+      "use": ["hero sections", "special brand moments", "animation"],
+      "minSize": 64
+    },
+    {
+      "id": "stone-1",
+      "name": "Stone 1 (Left)",
+      "description": "First/smallest menhir, standalone",
+      "use": ["animation", "progressive reveal"]
+    },
+    {
+      "id": "stone-2",
+      "name": "Stone 2 (Center)",
+      "description": "Second/middle menhir, standalone",
+      "use": ["animation", "progressive reveal"]
+    },
+    {
+      "id": "stone-3",
+      "name": "Stone 3 (Right)",
+      "description": "Third/largest menhir, standalone",
+      "use": ["animation", "progressive reveal"]
+    }
+  ],
+  "coordinates": {
+    "stone1": "2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5",
+    "stone2": "17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2",
+    "stone3": "37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8",
+    "continuous": "2.3,34.1 4.8,16.2 11.2,13.5 13.8,34.5 17.5,33.5 23.2,4.8 28.8,6.5 34.5,34.2 37.2,33.8 43.8,2.8 56.2,0.5 62.5,34.8"
+  }
+}
